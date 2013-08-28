@@ -1,0 +1,27 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Granite Eclipse-ui
+Bundle-SymbolicName: com.adobe.granite.ide.eclipse-ui;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: com.adobe.granite.ide.eclipse.ui.Activator
+Bundle-Vendor: ADOBE
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.m2e.core;bundle-version="1.4.0",
+ org.eclipse.m2e.archetype.common;bundle-version="1.4.0",
+ org.eclipse.ui.console,
+ org.eclipse.jdt.ui,
+ org.eclipse.m2e.launching;bundle-version="1.4.0",
+ org.eclipse.debug.ui;bundle-version="3.7.102",
+ org.apache.sling.ide.eclipse-core;bundle-version="0.0.1",
+ org.apache.sling.ide.eclipse-ui;bundle-version="0.0.1"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Import-Package: org.apache.maven.artifact.repository,
+ org.apache.maven.model,
+ org.apache.sling.ide.eclipse.core,
+ org.eclipse.core.resources,
+ org.eclipse.debug.core,
+ org.eclipse.wst.common.project.facet.core,
+ org.eclipse.wst.common.project.facet.core.internal,
+ org.eclipse.wst.server.core
+Bundle-ActivationPolicy: lazy

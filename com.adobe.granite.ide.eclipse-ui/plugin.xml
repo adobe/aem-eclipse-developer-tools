@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            id="com.adobe.granite.ide.eclipse.ui"
+            name="Adobe Granite">
+      </category>
+      <wizard
+            category="com.adobe.granite.ide.eclipse.ui"
+            class="com.adobe.granite.ide.eclipse.ui.wizards.np.NewGraniteProjectWizard"
+            icon="icons/granitesmall.png"
+            id="org.apache.sling.ide.eclipse.ui.wizards.NewGraniteProjectWizard"
+            name="New Adobe Granite Project">
+      </wizard>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="com.adobe.granite.ide.eclipse.ui.perspectives.GranitePerspective"
+            icon="icons/granitesmall.png"
+            id="com.adobe.granite.ide.eclipse.ui.perspectives.GranitePerspective"
+            name="Adobe Granite">
+      </perspective>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="*">
+         <perspectiveShortcut
+               id="com.adobe.granite.ide.eclipse.ui.perspectives.GranitePerspective">
+         </perspectiveShortcut>
+      </perspectiveExtension>
+   </extension>
+   <extension
+         point="org.eclipse.ui.startup">
+      <startup></startup>
+   </extension>
+
+</plugin>
