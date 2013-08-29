@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.adobe.granite.ide</groupId>
+  <artifactId>com.adobe.granite.ide.p2update</artifactId>
+  <packaging>eclipse-repository</packaging>
+  <name>Granite IDE Tools: P2 Repository</name>
+  <parent>
+  	<groupId>com.adobe.granite.ide</groupId>
+  	<artifactId>granite-ide-reactor</artifactId>
+  	<version>0.0.1-SNAPSHOT</version>
+  	<relativePath>../com.adobe.granite.ide.reactor</relativePath>
+  </parent>
+</project>

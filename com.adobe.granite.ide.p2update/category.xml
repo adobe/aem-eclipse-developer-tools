@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/org.apache.sling.ide.feature_0.0.1.qualifier.jar" id="org.apache.sling.ide.feature" version="0.0.1.qualifier">
+      <category name="sling"/>
+   </feature>
+   <bundle id="com.adobe.granite.ide.eclipse-ui" version="0.0.1.qualifier">
+      <category name="granite"/>
+   </bundle>
+   <category-def name="sling" label="Sling"/>
+   <category-def name="granite" label="Granite"/>
+</site>
