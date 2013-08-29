@@ -25,6 +25,7 @@ import org.apache.maven.archetype.catalog.Archetype;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.Parent;
 import org.apache.sling.ide.eclipse.core.ISlingLaunchpadServer;
+import org.apache.sling.ide.eclipse.ui.wizards.MavenHelper;
 import org.apache.sling.ide.eclipse.ui.wizards.np.AbstractNewSlingApplicationWizard;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
@@ -62,7 +63,7 @@ public class NewGraniteProjectWizard extends AbstractNewSlingApplicationWizard {
 	private IProject getParentProject(List<IProject> projects) {
 		for (Iterator<IProject> it = projects.iterator(); it.hasNext();) {
 			IProject project = it.next();
-			Model mavenModel = getMavenModel(project);
+			Model mavenModel = MavenHelper.getMavenModel(project);
 			if (mavenModel==null) {
 				continue;
 			}
