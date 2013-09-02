@@ -25,7 +25,6 @@ import org.eclipse.jface.resource.ImageDescriptor;
  */
 public final class SharedImages {
     
-    public static final ImageDescriptor SMALL_LOGO = ImageDescriptor.createFromFile(SharedImages.class, "smalllogo.png");
     public static final ImageDescriptor GRANITE_MEDIUM_LOGO = ImageDescriptor.createFromFile(SharedImages.class, "granitemedium.png");
     public static final ImageDescriptor NT_UNSTRUCTURED = ImageDescriptor.createFromFile(SharedImages.class, "unstructured.png");
 
