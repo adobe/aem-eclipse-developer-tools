@@ -17,6 +17,8 @@
  **************************************************************************/
 package com.adobe.granite.ide.eclipse.ui.wizards.np;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
@@ -24,6 +26,7 @@ import java.util.Properties;
 import org.apache.maven.archetype.catalog.Archetype;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.Parent;
+import org.apache.sling.ide.eclipse.core.EmbeddedArchetypeInstaller;
 import org.apache.sling.ide.eclipse.core.ISlingLaunchpadServer;
 import org.apache.sling.ide.eclipse.ui.wizards.MavenHelper;
 import org.apache.sling.ide.eclipse.ui.wizards.np.AbstractNewSlingApplicationWizard;
@@ -36,6 +39,7 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.m2e.core.MavenPlugin;
 import org.eclipse.wst.server.core.IServer;
 
+import com.adobe.granite.ide.eclipse.ui.Activator;
 import com.adobe.granite.ide.eclipse.ui.internal.SharedImages;
 
 public class NewGraniteProjectWizard extends AbstractNewSlingApplicationWizard {
@@ -53,11 +57,32 @@ public class NewGraniteProjectWizard extends AbstractNewSlingApplicationWizard {
 	public String doGetWindowTitle() {
 		return "Create new Adobe Granite application";
 	}
+	
+	@Override
+	public void installArchetypes() {
+	    EmbeddedArchetypeInstaller archetypeInstaller = new EmbeddedArchetypeInstaller(
+	    		"com.adobe.granite.archetypes", "sample-project-archetype", "slingclipse-embedded");
+	    try {
+	    	URL jarUrl = Activator.getDefault().getBundle().getResource(
+	    			"target/sample-project-archetype/sample-project-archetype-5-SNAPSHOT.jar");
+			archetypeInstaller.addResource("jar", jarUrl);
+			URL pomUrl = Activator.getDefault().getBundle().getResource(
+					"target/sample-project-archetype/sample-project-archetype-5-SNAPSHOT.pom");
+			archetypeInstaller.addResource("pom", pomUrl);
+			
+			archetypeInstaller.installArchetype();
+		} catch (IOException e) {
+			// TODO proper logging
+			e.printStackTrace();
+		}
+	    
+	}
 
 	@Override
 	public boolean acceptsArchetype(Archetype archetype2) {
-		return (archetype2.getArtifactId().startsWith("com.adobe.granite") ||
-				archetype2.getGroupId().startsWith("com.adobe.granite") );
+		//TODO: could further restrict it to only accept the slingclipse-embedded one
+		// but then it would be better to remove the archetype selection wizard page entirely
+		return (archetype2.getGroupId().startsWith("com.adobe.granite.archetypes") );
 	}
 	
 	private IProject getParentProject(List<IProject> projects) {
