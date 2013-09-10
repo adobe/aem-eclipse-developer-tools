@@ -12,7 +12,8 @@
             class="com.adobe.granite.ide.eclipse.ui.wizards.np.NewGraniteProjectWizard"
             icon="icons/granitesmall.png"
             id="org.apache.sling.ide.eclipse.ui.wizards.NewGraniteProjectWizard"
-            name="New Adobe Granite Project">
+            name="New Adobe Granite Project"
+            project="true">
       </wizard>
    </extension>
    <extension
