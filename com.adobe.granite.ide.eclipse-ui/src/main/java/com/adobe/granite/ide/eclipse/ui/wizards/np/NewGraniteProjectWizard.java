@@ -28,7 +28,7 @@ import org.apache.maven.model.Model;
 import org.apache.maven.model.Parent;
 import org.apache.sling.ide.eclipse.core.EmbeddedArchetypeInstaller;
 import org.apache.sling.ide.eclipse.core.ISlingLaunchpadServer;
-import org.apache.sling.ide.eclipse.ui.wizards.MavenHelper;
+import org.apache.sling.ide.eclipse.core.internal.ProjectHelper;
 import org.apache.sling.ide.eclipse.ui.wizards.np.AbstractNewSlingApplicationWizard;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
@@ -43,10 +43,6 @@ import com.adobe.granite.ide.eclipse.ui.Activator;
 import com.adobe.granite.ide.eclipse.ui.internal.SharedImages;
 
 public class NewGraniteProjectWizard extends AbstractNewSlingApplicationWizard {
-
-	public NewGraniteProjectWizard() {
-		// TODO Auto-generated constructor stub
-	}
 
 	@Override
 	public ImageDescriptor getLogo() {
@@ -88,7 +84,7 @@ public class NewGraniteProjectWizard extends AbstractNewSlingApplicationWizard {
 	private IProject getParentProject(List<IProject> projects) {
 		for (Iterator<IProject> it = projects.iterator(); it.hasNext();) {
 			IProject project = it.next();
-			Model mavenModel = MavenHelper.getMavenModel(project);
+			Model mavenModel = ProjectHelper.getMavenModel(project);
 			if (mavenModel==null) {
 				continue;
 			}
