@@ -26,9 +26,9 @@ import java.util.Properties;
 import org.apache.maven.archetype.catalog.Archetype;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.Parent;
-import org.apache.sling.ide.eclipse.core.EmbeddedArchetypeInstaller;
 import org.apache.sling.ide.eclipse.core.ISlingLaunchpadServer;
 import org.apache.sling.ide.eclipse.core.internal.ProjectHelper;
+import org.apache.sling.ide.eclipse.m2e.EmbeddedArchetypeInstaller;
 import org.apache.sling.ide.eclipse.ui.wizards.np.AbstractNewSlingApplicationWizard;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
@@ -83,12 +83,10 @@ public class NewGraniteProjectWizard extends AbstractNewSlingApplicationWizard {
 	
 	private IProject getParentProject(List<IProject> projects) {
 		for (Iterator<IProject> it = projects.iterator(); it.hasNext();) {
-			IProject project = it.next();
-			Model mavenModel = ProjectHelper.getMavenModel(project);
-			if (mavenModel==null) {
-				continue;
-			}
-			if ("pom".equals(mavenModel.getPackaging()) && "parent".equals(mavenModel.getArtifactId())) {
+			final IProject project = it.next();
+			final String packaging = ProjectHelper.getMavenProperty(project, "packaging");
+			final String artifactId = ProjectHelper.getMavenProperty(project, "artifactId");
+			if (artifactId!=null && artifactId.equals("parent") && packaging!=null && packaging.equals("pom")) {
 				return project;
 			}
 		}
