@@ -1,53 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+/*************************************************************************
+ *
+ * ADOBE CONFIDENTIAL
+ * __________________
+ *
+ *  Copyright 2014 Adobe Systems Incorporated
+ *  All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains
+ * the property of Adobe Systems Incorporated and its suppliers,
+ * if any.  The intellectual and technical concepts contained
+ * herein are proprietary to Adobe Systems Incorporated and its
+ * suppliers and are protected by trade secret or copyright law.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Adobe Systems Incorporated.
+ **************************************************************************/
+-->
 <project
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.adobe.granite.ide</groupId>
-	<artifactId>granite-ide-reactor</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<packaging>pom</packaging>
-	<name>Granite IDE Tools: Reactor</name>
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+  xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>tycho-maven-plugin</artifactId>
-				<version>${tycho.version}</version>
-				<extensions>true</extensions>
-			</plugin>
-			<plugin>
-				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>target-platform-configuration</artifactId>
-				<version>${tycho.version}</version>
-				<configuration>
-					<target>
-						<artifact>
-							<groupId>org.apache.sling.ide</groupId>
-							<artifactId>org.apache.sling.ide.target-definition</artifactId>
-							<version>${project.version}</version>
-						</artifact>
-					</target>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+  <groupId>com.adobe.granite.ide</groupId>
+  <artifactId>granite-ide-reactor</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
 
-	<properties>
-		<tycho.version>0.18.1</tycho.version>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
-	<modules>
-		<module>../com.adobe.granite.ide.eclipse-ui</module>
-		<module>../com.adobe.granite.ide.p2update</module>
-	</modules>
-	<dependencies>
-		<dependency>
-			<groupId>org.apache.sling.ide</groupId>
-			<artifactId>reactor</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-			<type>pom</type>
-		</dependency>
-	</dependencies>
+  <name>Granite IDE Tools: Reactor</name>
+
+  <properties>
+    <tycho.version>0.18.1</tycho.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <modules>
+    <module>../com.adobe.granite.ide.eclipse-ui</module>
+    <module>../com.adobe.granite.ide.p2update</module>
+  </modules>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.apache.sling.ide</groupId>
+      <artifactId>reactor</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+      <type>pom</type>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.eclipse.tycho</groupId>
+        <artifactId>tycho-maven-plugin</artifactId>
+        <version>${tycho.version}</version>
+        <extensions>true</extensions>
+      </plugin>
+      <plugin>
+        <groupId>org.eclipse.tycho</groupId>
+        <artifactId>target-platform-configuration</artifactId>
+        <version>${tycho.version}</version>
+        <configuration>
+          <target>
+            <artifact>
+              <groupId>org.apache.sling.ide</groupId>
+              <artifactId>org.apache.sling.ide.target-definition</artifactId>
+              <version>${project.version}</version>
+            </artifact>
+          </target>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
 </project>
