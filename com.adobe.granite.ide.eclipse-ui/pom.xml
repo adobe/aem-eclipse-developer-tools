@@ -25,7 +25,7 @@
     <groupId>com.adobe.granite.ide</groupId>
     <artifactId>granite-ide-reactor</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <relativePath>../com.adobe.granite.ide.reactor</relativePath>
+    <relativePath>../</relativePath>
   </parent>
 
   <groupId>com.adobe.granite.ide</groupId>

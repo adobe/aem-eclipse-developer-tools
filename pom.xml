@@ -36,8 +36,8 @@
   </properties>
 
   <modules>
-    <module>../com.adobe.granite.ide.eclipse-ui</module>
-    <module>../com.adobe.granite.ide.p2update</module>
+    <module>com.adobe.granite.ide.eclipse-ui</module>
+    <module>com.adobe.granite.ide.p2update</module>
   </modules>
 
   <dependencies>
