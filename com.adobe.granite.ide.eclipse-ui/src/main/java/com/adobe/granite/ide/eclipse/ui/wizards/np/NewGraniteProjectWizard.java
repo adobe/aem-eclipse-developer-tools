@@ -14,7 +14,6 @@ limitations under the License.
 */
 package com.adobe.granite.ide.eclipse.ui.wizards.np;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.Iterator;
 import java.util.List;
@@ -64,7 +63,7 @@ public class NewGraniteProjectWizard extends AbstractNewSlingApplicationWizard {
 			archetypeInstaller.addResource("pom", pomUrl);
 			
 			archetypeInstaller.installArchetype();
-		} catch (IOException e) {
+		} catch (Exception e) {
 			// TODO proper logging
 			e.printStackTrace();
 		}
