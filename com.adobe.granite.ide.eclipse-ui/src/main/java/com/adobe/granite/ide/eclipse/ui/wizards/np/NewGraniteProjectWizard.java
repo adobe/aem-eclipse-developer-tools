@@ -26,7 +26,7 @@ import org.apache.maven.model.Parent;
 import org.apache.sling.ide.eclipse.core.ISlingLaunchpadServer;
 import org.apache.sling.ide.eclipse.core.internal.ProjectHelper;
 import org.apache.sling.ide.eclipse.m2e.EmbeddedArchetypeInstaller;
-import org.apache.sling.ide.eclipse.ui.wizards.np.AbstractNewSlingApplicationWizard;
+import org.apache.sling.ide.eclipse.ui.wizards.np.AbstractNewMavenBasedSlingApplicationWizard;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
@@ -39,7 +39,7 @@ import org.eclipse.wst.server.core.IServer;
 import com.adobe.granite.ide.eclipse.ui.Activator;
 import com.adobe.granite.ide.eclipse.ui.internal.SharedImages;
 
-public class NewGraniteProjectWizard extends AbstractNewSlingApplicationWizard {
+public class NewGraniteProjectWizard extends AbstractNewMavenBasedSlingApplicationWizard {
 
 	@Override
 	public ImageDescriptor getLogo() {
@@ -57,10 +57,10 @@ public class NewGraniteProjectWizard extends AbstractNewSlingApplicationWizard {
 	    		"com.adobe.granite.archetypes", "sample-project-archetype", "slingclipse-embedded");
 	    try {
 	    	URL jarUrl = Activator.getDefault().getBundle().getResource(
-	    			"target/sample-project-archetype/sample-project-archetype-5-SNAPSHOT.jar");
+	    			"target/sample-project-archetype/sample-project-archetype-7.1-SNAPSHOT.jar");
 			archetypeInstaller.addResource("jar", jarUrl);
 			URL pomUrl = Activator.getDefault().getBundle().getResource(
-					"target/sample-project-archetype/sample-project-archetype-5-SNAPSHOT.pom");
+					"target/sample-project-archetype/sample-project-archetype-7.1-SNAPSHOT.pom");
 			archetypeInstaller.addResource("pom", pomUrl);
 			
 			archetypeInstaller.installArchetype();
@@ -165,5 +165,5 @@ public class NewGraniteProjectWizard extends AbstractNewSlingApplicationWizard {
 
 		super.finishConfiguration(projects, server, monitor);
 	}
-	
+
 }
