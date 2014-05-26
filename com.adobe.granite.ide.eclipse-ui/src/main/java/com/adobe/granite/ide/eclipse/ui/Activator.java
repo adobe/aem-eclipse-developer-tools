@@ -45,7 +45,7 @@ public class Activator extends AbstractUIPlugin {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
-    	WhitelabelSupport.JCR_NODE_ICON = SharedImages.NT_UNSTRUCTURED;
+//    	WhitelabelSupport.JCR_NODE_ICON = SharedImages.NT_UNSTRUCTURED;
 	}
 
 	/*
