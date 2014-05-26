@@ -32,11 +32,11 @@
   <name>Granite IDE Tools: P2 Repository</name>
 
   <build>
-    <extensions>
+  	<extensions>
       <extension>
         <groupId>org.apache.maven.wagon</groupId>
-         <artifactId>wagon-ftp</artifactId>
-         <version>1.0-beta-6</version>
+         <artifactId>wagon-ssh</artifactId>
+         <version>2.6</version>
       </extension>
     </extensions>
 
@@ -53,11 +53,11 @@
               <goal>upload</goal>
             </goals>
             <configuration>
-              <serverId>eclipse.adobe.com</serverId>
+              <serverId>eclipse.update.site</serverId>
               <fromDir>${project.build.directory}/repository</fromDir>
-              <includes>*</includes>
+              <includes>**</includes>
               <excludes>pom.xml</excludes>
-              <url>ftp://${eclipse.adobe.com.host}</url>
+              <url>${eclipse.update.site.url}</url>
               <toDir>${project.version}</toDir>
             </configuration>
           </execution>
