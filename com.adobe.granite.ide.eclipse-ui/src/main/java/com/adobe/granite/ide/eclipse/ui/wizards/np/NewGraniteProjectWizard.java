@@ -50,7 +50,7 @@ public class NewGraniteProjectWizard extends AbstractNewMavenBasedSlingApplicati
 	
 	@Override
 	public String doGetWindowTitle() {
-		return "Create new Adobe Granite application";
+		return "Create new Adobe AEM application";
 	}
 	
 	@Override
