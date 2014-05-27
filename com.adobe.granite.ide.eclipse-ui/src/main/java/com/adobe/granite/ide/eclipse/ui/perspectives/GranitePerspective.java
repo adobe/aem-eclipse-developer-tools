@@ -81,7 +81,8 @@ public class GranitePerspective implements IPerspectiveFactory {
 				IPageLayout.BOTTOM,
 				0.7f,
 				factory.getEditorArea());
-		bottomRight.addView(IPageLayout.ID_PROP_SHEET);
+//		bottomRight.addView(IPageLayout.ID_PROP_SHEET);
+		bottomRight.addView("org.apache.sling.ide.eclipse.ui.views.JcrPropertiesView");
 		bottomRight.addView(IPageLayout.ID_PROBLEM_VIEW);
 		bottomRight.addView("org.eclipse.team.ui.GenericHistoryView"); //NON-NLS-1
 		bottomRight.addPlaceholder(IConsoleConstants.ID_CONSOLE_VIEW);
