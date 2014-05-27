@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Granite IDE Tools: UI-Extensions
+Bundle-Name: AEM IDE Tools: UI-Extensions
 Bundle-SymbolicName: com.adobe.granite.ide.eclipse-ui;singleton:=true
 Bundle-Version: 0.0.1.qualifier
 Bundle-Activator: com.adobe.granite.ide.eclipse.ui.Activator

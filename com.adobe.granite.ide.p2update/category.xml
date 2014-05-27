@@ -10,5 +10,5 @@
       <category name="granite"/>
    </bundle>
    <category-def name="sling" label="Sling"/>
-   <category-def name="granite" label="Granite"/>
+   <category-def name="granite" label="AEM"/>
 </site>
