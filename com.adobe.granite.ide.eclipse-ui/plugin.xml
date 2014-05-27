@@ -20,14 +20,14 @@
          point="org.eclipse.ui.newWizards">
       <category
             id="com.adobe.granite.ide.eclipse.ui"
-            name="Adobe Granite">
+            name="AEM">
       </category>
       <wizard
             category="com.adobe.granite.ide.eclipse.ui"
             class="com.adobe.granite.ide.eclipse.ui.wizards.np.NewGraniteProjectWizard"
-            icon="icons/granitesmall.png"
+            icon="icons/mc_experiencemanager_transp.png"
             id="org.apache.sling.ide.eclipse.ui.wizards.NewGraniteProjectWizard"
-            name="New Adobe Granite Project"
+            name="New AEM Project"
             project="true">
       </wizard>
    </extension>
@@ -35,9 +35,9 @@
          point="org.eclipse.ui.perspectives">
       <perspective
             class="com.adobe.granite.ide.eclipse.ui.perspectives.GranitePerspective"
-            icon="icons/granitesmall.png"
+            icon="icons/mc_experiencemanager_transp.png"
             id="com.adobe.granite.ide.eclipse.ui.perspectives.GranitePerspective"
-            name="Adobe Granite">
+            name="AEM">
       </perspective>
    </extension>
    <extension
