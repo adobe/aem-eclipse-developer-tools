@@ -29,11 +29,13 @@ import org.apache.sling.ide.eclipse.m2e.EmbeddedArchetypeInstaller;
 import org.apache.sling.ide.eclipse.ui.wizards.np.AbstractNewMavenBasedSlingApplicationWizard;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.m2e.core.MavenPlugin;
+import org.eclipse.m2e.core.project.MavenUpdateRequest;
 import org.eclipse.wst.server.core.IServer;
 
 import com.adobe.granite.ide.eclipse.ui.Activator;
@@ -148,6 +150,14 @@ public class NewGraniteProjectWizard extends AbstractNewMavenBasedSlingApplicati
 		super.configureBundleProject(aBundleProject, projects, monitor);
 	}
 
+	protected void updateProjectConfigurations(List<IProject> projects, boolean forceDependencyUpdate, IProgressMonitor monitor) throws CoreException {
+        for (Iterator<IProject> it = projects.iterator(); it.hasNext();) {
+            IProject project = it.next();
+            MavenPlugin.getProjectConfigurationManager().updateProjectConfiguration(new MavenUpdateRequest(project, /*mavenConfiguration.isOffline()*/false, forceDependencyUpdate), monitor);
+            project.build(IncrementalProjectBuilder.CLEAN_BUILD, monitor);
+        }
+    }
+	
 	@Override
 	protected void finishConfiguration(List<IProject> projects, IServer server,
 			IProgressMonitor monitor) throws CoreException {
@@ -163,6 +173,8 @@ public class NewGraniteProjectWizard extends AbstractNewMavenBasedSlingApplicati
 			MavenPlugin.getMavenModelManager().createMavenModel(parentProject.getFile("pom.xml"), model);
 		}
 
+		updateProjectConfigurations(projects, true, monitor);
+		
 		super.finishConfiguration(projects, server, monitor);
 	}
 
