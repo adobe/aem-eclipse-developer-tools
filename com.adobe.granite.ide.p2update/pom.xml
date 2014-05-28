@@ -29,7 +29,7 @@
   <artifactId>com.adobe.granite.ide.p2update</artifactId>
   <packaging>eclipse-repository</packaging>
 
-  <name>Granite IDE Tools: Update Site</name>
+  <name>AEM Developer Tools for Eclipse: Update Site</name>
 
   <build>
   	<extensions>
