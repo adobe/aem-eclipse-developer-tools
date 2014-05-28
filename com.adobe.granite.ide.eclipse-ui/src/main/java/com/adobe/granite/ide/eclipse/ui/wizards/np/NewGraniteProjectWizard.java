@@ -59,10 +59,10 @@ public class NewGraniteProjectWizard extends AbstractNewMavenBasedSlingApplicati
 	    		"com.adobe.granite.archetypes", "sample-project-archetype", "slingclipse-embedded");
 	    try {
 	    	URL jarUrl = Activator.getDefault().getBundle().getResource(
-	    			"target/sample-project-archetype/sample-project-archetype-7.1-SNAPSHOT.jar");
+	    			"target/sample-project-archetype/sample-project-archetype-7-SNAPSHOT.jar");
 			archetypeInstaller.addResource("jar", jarUrl);
 			URL pomUrl = Activator.getDefault().getBundle().getResource(
-					"target/sample-project-archetype/sample-project-archetype-7.1-SNAPSHOT.pom");
+					"target/sample-project-archetype/sample-project-archetype-7-SNAPSHOT.pom");
 			archetypeInstaller.addResource("pom", pomUrl);
 			
 			archetypeInstaller.installArchetype();
