@@ -49,6 +49,15 @@ public class GranitePerspective implements IPerspectiveFactory {
 		// Creates the overall folder layout. 
 		// Note that each new Folder uses a percentage of the remaining EditorArea.
 		
+        IFolderLayout veryBottom =
+                factory.createFolder(
+                        "veryBottom",
+                        IPageLayout.BOTTOM,
+                        0.82f,
+                        factory.getEditorArea());
+//      leftBottom.addView("org.eclipse.wst.server.ui.ServersView");
+        veryBottom.addView(IConsoleConstants.ID_CONSOLE_VIEW);
+
 		IFolderLayout left =
 				factory.createFolder(
 					"topLeft", //NON-NLS-1
@@ -58,15 +67,6 @@ public class GranitePerspective implements IPerspectiveFactory {
 		left.addView(IPageLayout.ID_PROJECT_EXPLORER);
 		left.addPlaceholder(IPageLayout.ID_RES_NAV);
 		
-		IFolderLayout leftBottom =
-				factory.createFolder(
-						"leftBottom",
-						IPageLayout.BOTTOM,
-						0.7f,
-						IPageLayout.ID_PROJECT_EXPLORER);
-//		leftBottom.addView("org.eclipse.wst.server.ui.ServersView");
-		leftBottom.addView(IConsoleConstants.ID_CONSOLE_VIEW);
-
 		IFolderLayout leftMiddle =
 				factory.createFolder(
 						"leftMiddle",
@@ -85,7 +85,7 @@ public class GranitePerspective implements IPerspectiveFactory {
 		bottomRight.addView("org.apache.sling.ide.eclipse.ui.views.JcrPropertiesView");
 		bottomRight.addView(IPageLayout.ID_PROBLEM_VIEW);
 		bottomRight.addView("org.eclipse.team.ui.GenericHistoryView"); //NON-NLS-1
-		bottomRight.addPlaceholder(IConsoleConstants.ID_CONSOLE_VIEW);
+//		bottomRight.addPlaceholder(IConsoleConstants.ID_CONSOLE_VIEW);
 
 		IFolderLayout right =
 				factory.createFolder(
