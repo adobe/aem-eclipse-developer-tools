@@ -54,4 +54,203 @@
       <startup></startup>
    </extension>
 
+
+	<!-- Hide various Sling UI contributions --> 
+   <extension
+         point="org.eclipse.ui.activities">
+         <activity
+         	   name="Sling IDE Tooling"
+         	   description="Contributions from the Sling IDE tooling plugins"
+               id="org.apache.sling.ide.eclipse-ui.activity"/>
+
+ 		<category id="org.apache.sling.ide.eclipse-ui.activities"
+   			description="Sling IDE tooling UI Activities"
+   			name="Sling IDE tooling" />
+   
+  		<categoryActivityBinding activityId="org.apache.sling.ide.eclipse-ui.activity"
+   			categoryId="org.apache.sling.ide.eclipse-ui.activities" />
+   
+   		<!-- Bind root menu contribution -->
+  		<activityPatternBinding activityId="org.apache.sling.ide.eclipse-ui.activity"
+  			isEqualityPattern="true"
+   			pattern="org.apache.sling.ide.eclipse-ui/org.apache.sling.ide.menu" />
+
+		<!-- Bind project property page -->   			
+  		<activityPatternBinding activityId="org.apache.sling.ide.eclipse-ui.activity"
+  			isEqualityPattern="true"
+   			pattern="org.apache.sling.ide.eclipse-ui/org.apache.sling.ide.projectPropertyPage" />
+   			
+		<!-- Bind runtime type -->   			
+  		<activityPatternBinding activityId="org.apache.sling.ide.eclipse-ui.activity"
+  			isEqualityPattern="true"
+   			pattern="org.apache.sling.ide.eclipse-ui/org.apache.sling.ide.launchpadRuntimeType" />
+
+		<!-- Bind server type -->   			
+  		<activityPatternBinding activityId="org.apache.sling.ide.eclipse-ui.activity"
+  			isEqualityPattern="true"
+   			pattern="org.apache.sling.ide.eclipse-ui/org.apache.sling.ide.launchpadServer" />
+
+		<!-- Bind launch configuration type -->   			
+  		<activityPatternBinding activityId="org.apache.sling.ide.eclipse-ui.activity"
+  			isEqualityPattern="true"
+   			pattern="org.apache.sling.ide.eclipse-ui/org.apache.sling.ide.launchpadLaunchConfigurationType" />
+
+		<!-- Bind view -->   			
+  		<activityPatternBinding activityId="org.apache.sling.ide.eclipse-ui.activity"
+  			isEqualityPattern="true"
+   			pattern="org.apache.sling.ide.eclipse-ui/org.apache.sling.ide.eclipse.ui.views.JcrPropertiesView" />
+
+		<!-- Bind bundle project wizard -->   			
+  		<activityPatternBinding activityId="org.apache.sling.ide.eclipse-ui.activity"
+  			isEqualityPattern="true"
+   			pattern="org.apache.sling.ide.eclipse-m2e-ui/org.apache.sling.ide.eclipse.ui.wizards.np.NewSlingBundleWizard" />
+
+		<!-- Bind content project wizard -->
+		<!-- Note that this is not yet replaced by a proper content project wizard in the AEM dev tools -->
+  		<activityPatternBinding activityId="org.apache.sling.ide.eclipse-ui.activity"
+  			isEqualityPattern="true"
+   			pattern="org.apache.sling.ide.eclipse-ui/org.apache.sling.ide.eclipse.ui.wizards.NewSlingContentProjectWizard" />
+
+		<!-- Bind console factory -->
+  		<activityPatternBinding activityId="org.apache.sling.ide.eclipse-ui.activity"
+  			isEqualityPattern="true"
+   			pattern="org.apache.sling.ide.eclipse-ui/org.apache.sling.ide.eclipse.ui.console" />
+   			
+   </extension>
+   
+	<!-- Add AEM menu contributions -->
+     <extension
+         point="org.eclipse.ui.popupMenus">
+        <objectContribution
+            id="org.apache.sling.ide.menu"
+            objectClass="org.eclipse.core.resources.IResource">
+            <menu id="org.apache.sling.ide.menu"
+              path="additions"
+              label="AEM">
+            	<groupMarker name="aem"/>
+            </menu>
+         </objectContribution>
+  	</extension>
+  	
+  	<!-- Add AEM property page -->
+   <extension point="org.eclipse.ui.propertyPages"> 
+        <page 
+            id="org.apache.sling.ide.projectPropertyPage.override" 
+            name="AEM" 
+            class="org.apache.sling.ide.eclipse.ui.propertyPages.SlingProjectPropertyPage">
+            <enabledWhen>
+            <and>
+             	<instanceof
+                  	value="org.eclipse.core.resources.IProject">
+             	</instanceof>
+             	<or>
+	 				<test 
+			            property="org.eclipse.wst.common.project.facet.core.projectFacet" 
+			            value="sling.content"/>
+			    </or>
+             </and>
+          </enabledWhen>
+        </page> 
+    </extension>
+
+	<!-- add WST runtime type -->
+  <extension point="org.eclipse.wst.server.core.runtimeTypes">
+    <runtimeType
+       id="org.apache.sling.ide.launchpadRuntimeType"
+       name="Adobe Experience Manager"
+       description="Adobe Experience Manager runtime"
+       vendor="Adobe"
+       version="1.0"
+       class="org.apache.sling.ide.eclipse.core.internal.SlingLaunchpadRuntime">
+       <moduleType types="sling.content" versions="1.0"/> 
+       <moduleType types="sling.bundle" versions="1.0"/> 
+    </runtimeType>
+  </extension>	
+
+	<!-- Add WST server type -->
+  <extension point="org.eclipse.wst.server.core.serverTypes">
+     <serverType
+       id="org.apache.sling.ide.launchpadServer"
+       name="Adobe Experience Manager"
+       description="Adobe Experience Manager instance"
+       supportsRemoteHosts="true"
+       runtime="true"
+       startTimeout="30000"
+       stopTimeout="15000"
+       initialState="stopped"
+       hasConfiguration="true"
+       launchConfigId="org.apache.sling.ide.launchpadLaunchConfigurationType"       
+       runtimeTypeId="org.apache.sling.ide.launchpadRuntimeType"
+       class="org.apache.sling.ide.eclipse.core.internal.SlingLaunchpadServer"
+       behaviourClass="org.apache.sling.ide.eclipse.core.internal.SlingLaunchpadBehaviour">
+     </serverType>
+  </extension>
+  
+  <!-- Add launch configuration type -->
+  <extension point="org.eclipse.debug.core.launchConfigurationTypes">
+     <launchConfigurationType
+        id="org.apache.sling.ide.launchpadLaunchConfigurationType"
+        name="AEM"
+        delegate="org.apache.sling.ide.eclipse.core.internal.SlingLaunchpadLaunchConfigurationDelegate"
+        modes="run,debug"
+        sourceLocatorId="org.eclipse.jdt.launching.sourceLocator.JavaSourceLookupDirector"/>
+  </extension>
+  
+  	<!-- Add view category -->
+    <extension
+          point="org.eclipse.ui.views">
+       <category
+             id="com.adobe.granite.ide.views.aem"
+             name="AEM">
+       </category>
+       <view
+             category="com.adobe.granite.ide.views.aem"
+             class="org.apache.sling.ide.eclipse.ui.views.JcrPropertiesView"
+             id="com.adobe.granite.ide.views.ui.views.JcrPropertiesView"
+             icon="icons/mc_experiencemanager_transp.png"
+             name="JCR Properties">
+       </view>
+    </extension>
+    
+    <!-- Add wizards -->
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <wizard
+            category="com.adobe.granite.ide.eclipse.ui"
+            class="org.apache.sling.ide.eclipse.ui.wizards.np.NewSlingBundleWizard"
+            icon="icons/mc_experiencemanager_transp.png"
+            id="com.adobe.granite.eclipse.ui.wizards.np.NewSlingBundleWizard"
+            name="AEM Bundle Project"
+            project="true">
+      </wizard>
+   </extension>
+   
+   <extension
+         point="org.eclipse.ui.importWizards">
+      <category
+            id="com.adobe.granite.ide.eclipse.ui.wizards.import"
+            name="AEM">
+      </category>
+      <wizard
+            category="com.adobe.granite.ide.eclipse.ui.wizards.import"
+            class="org.apache.sling.ide.eclipse.ui.wizards.ImportWizard"
+            icon="icons/mc_experiencemanager_transp.png"
+            id="com.adobe.granite.ide.eclipse.ui.wizards.importWizard"
+            name="Import from Repository">
+         <description>
+            Import content from a remote Repository into the local Workspace.
+         </description>
+      </wizard>
+   </extension>
+   
+   <!-- Add console -->
+   <extension
+         point="org.eclipse.ui.console.consoleFactories">
+      <consoleFactory
+      		id="org.apache.sling.ide.eclipse.ui.console"
+      		icon="icons/mc_experiencemanager_transp.png"
+            class="org.apache.sling.ide.eclipse.ui.console.SlingConsoleFactory"
+            label="AEM Console">
+      </consoleFactory>
+   </extension>
 </plugin>

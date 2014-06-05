@@ -15,7 +15,15 @@
  */
 package com.adobe.granite.ide.eclipse.ui.internal;
 
+import java.net.URL;
+
+import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.jface.resource.ImageDescriptor;
+import org.osgi.framework.Bundle;
+
+import com.adobe.granite.ide.eclipse.ui.Activator;
 
 /**
  * The <tt>SharedImages</tt> class contains references to images
@@ -25,6 +33,16 @@ public final class SharedImages {
     
     public static final ImageDescriptor GRANITE_MEDIUM_LOGO = ImageDescriptor.createFromFile(SharedImages.class, "granitemedium.png");
     public static final ImageDescriptor NT_UNSTRUCTURED = ImageDescriptor.createFromFile(SharedImages.class, "unstructured.png");
+    public static final ImageDescriptor GRANITE_ICON = createImageDescriptor(Activator.getDefault().getBundle(),
+            Path.fromPortableString("icons/granitesmall.png"));
+
+    public static ImageDescriptor createImageDescriptor(Bundle bundle, IPath path) {
+        URL url = FileLocator.find(bundle, path, null);
+        if (url != null) {
+            return ImageDescriptor.createFromURL(url);
+        }
+        return null;
+    }
 
     private SharedImages() {
     }

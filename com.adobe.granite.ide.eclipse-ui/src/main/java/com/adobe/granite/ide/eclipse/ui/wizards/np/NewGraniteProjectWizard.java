@@ -33,21 +33,14 @@ import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.m2e.core.MavenPlugin;
 import org.eclipse.m2e.core.project.MavenUpdateRequest;
 import org.eclipse.wst.server.core.IServer;
 
 import com.adobe.granite.ide.eclipse.ui.Activator;
-import com.adobe.granite.ide.eclipse.ui.internal.SharedImages;
 
 public class NewGraniteProjectWizard extends AbstractNewMavenBasedSlingApplicationWizard {
 
-	@Override
-	public ImageDescriptor getLogo() {
-		return SharedImages.GRANITE_MEDIUM_LOGO;
-	}
-	
 	@Override
 	public String doGetWindowTitle() {
 		return "Create new Adobe AEM application";

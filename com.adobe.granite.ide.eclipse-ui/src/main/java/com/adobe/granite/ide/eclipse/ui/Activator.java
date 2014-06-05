@@ -45,7 +45,12 @@ public class Activator extends AbstractUIPlugin {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
-//    	WhitelabelSupport.JCR_NODE_ICON = SharedImages.NT_UNSTRUCTURED;
+
+        WhitelabelSupport.setWizardBanner(SharedImages.GRANITE_MEDIUM_LOGO);
+        WhitelabelSupport.setProjectWizardBanner(SharedImages.GRANITE_MEDIUM_LOGO);
+        WhitelabelSupport.setJcrNodeIcon(SharedImages.NT_UNSTRUCTURED);
+        WhitelabelSupport.setProductIcon(SharedImages.GRANITE_ICON);
+        WhitelabelSupport.setProductName("AEM");
 	}
 
 	/*
