@@ -27,7 +27,7 @@
             class="com.adobe.granite.ide.eclipse.ui.wizards.np.NewGraniteProjectWizard"
             icon="icons/mc_experiencemanager_transp.png"
             id="org.apache.sling.ide.eclipse.ui.wizards.NewGraniteProjectWizard"
-            name="New AEM Project"
+            name="AEM Sample Multi-Module Project"
             project="true">
       </wizard>
    </extension>
