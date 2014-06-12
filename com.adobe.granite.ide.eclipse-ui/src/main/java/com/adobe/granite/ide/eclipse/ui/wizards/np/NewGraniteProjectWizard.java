@@ -78,7 +78,7 @@ public class NewGraniteProjectWizard extends AbstractNewMavenBasedSlingApplicati
 			final IProject project = it.next();
 			final String packaging = ProjectHelper.getMavenProperty(project, "packaging");
 			final String artifactId = ProjectHelper.getMavenProperty(project, "artifactId");
-			if (artifactId!=null && artifactId.equals("parent") && packaging!=null && packaging.equals("pom")) {
+			if (artifactId!=null && artifactId.endsWith("parent") && packaging!=null && packaging.equals("pom")) {
 				return project;
 			}
 		}
