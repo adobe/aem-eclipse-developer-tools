@@ -212,19 +212,6 @@
        </view>
     </extension>
     
-    <!-- Add wizards -->
-   <extension
-         point="org.eclipse.ui.newWizards">
-      <wizard
-            category="com.adobe.granite.ide.eclipse.ui"
-            class="org.apache.sling.ide.eclipse.ui.wizards.np.NewSlingBundleWizard"
-            icon="icons/mc_experiencemanager_transp.png"
-            id="com.adobe.granite.eclipse.ui.wizards.np.NewSlingBundleWizard"
-            name="AEM Bundle Project"
-            project="true">
-      </wizard>
-   </extension>
-   
    <extension
          point="org.eclipse.ui.importWizards">
       <category
