@@ -27,6 +27,7 @@ import org.apache.sling.ide.eclipse.core.ISlingLaunchpadServer;
 import org.apache.sling.ide.eclipse.core.internal.ProjectHelper;
 import org.apache.sling.ide.eclipse.m2e.EmbeddedArchetypeInstaller;
 import org.apache.sling.ide.eclipse.ui.wizards.np.AbstractNewMavenBasedSlingApplicationWizard;
+import org.apache.sling.ide.eclipse.ui.wizards.np.ArchetypeParametersWizardPage;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
@@ -64,6 +65,11 @@ public class NewGraniteProjectWizard extends AbstractNewMavenBasedSlingApplicati
 			e.printStackTrace();
 		}
 	    
+	}
+	
+	@Override
+	protected ArchetypeParametersWizardPage createArchetypeParametersWizardPage() {
+        return new SimplerParametersWizardPage(this);
 	}
 
 	@Override
