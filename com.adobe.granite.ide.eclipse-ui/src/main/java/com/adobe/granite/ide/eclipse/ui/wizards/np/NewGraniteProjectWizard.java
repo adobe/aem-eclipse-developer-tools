@@ -15,12 +15,14 @@
  */
 package com.adobe.granite.ide.eclipse.ui.wizards.np;
 
+import java.net.URI;
 import java.net.URL;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 
 import org.apache.maven.archetype.catalog.Archetype;
+import org.apache.maven.artifact.repository.ArtifactRepository;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.Parent;
 import org.apache.sling.ide.eclipse.core.ISlingLaunchpadServer;
@@ -34,6 +36,8 @@ import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.m2e.core.MavenPlugin;
 import org.eclipse.m2e.core.project.MavenUpdateRequest;
 import org.eclipse.wst.server.core.IServer;
@@ -177,4 +181,53 @@ public class NewGraniteProjectWizard extends AbstractNewMavenBasedSlingApplicati
 		super.finishConfiguration(projects, server, monitor);
 	}
 
+	@Override
+	public boolean performFinish() {
+	    if (!assertPublicRepoConfigured()) {
+	        return false;
+	    }
+	    return super.performFinish();
+	}
+
+    private boolean assertPublicRepoConfigured() {
+        try {
+            List<ArtifactRepository> repos = MavenPlugin.getMaven().getPluginArtifactRepositories();
+            for (Iterator<ArtifactRepository> it = repos.iterator(); it.hasNext();) {
+                ArtifactRepository artifactRepository = it.next();
+                if (isRepoAdobeCom(artifactRepository)) {
+                    return true;
+                }
+            }
+            reportError(new CoreException(new Status(IStatus.ERROR, Activator.PLUGIN_ID, 
+                    "Could not find repo.adobe.com as a configured repository (double-check settings.xml as per http://helpx.adobe.com/experience-manager/kb/SetUpTheAdobeMavenRepository.html)")));
+            return false;
+        } catch (CoreException e) {
+            reportError(e);
+            return false;
+        }
+        
+    }
+
+    private boolean isRepoAdobeCom(ArtifactRepository artifactRepository) {
+        if (artifactRepository==null) {
+            return false;
+        }
+        try{
+            URI uri = new URI(artifactRepository.getUrl());
+            if (uri.getHost().equals("repo.adobe.com")) {
+                return true;
+            }
+            // GRANITE-6406 
+            //  accepting any *.adobe.com as a valid repo - besides 
+            //  explicitly accepting repo.adobe.com
+            //  to remain flexible..
+            if (uri.getHost().endsWith(".adobe.com")) {
+                return true;
+            }
+            return false;
+        } catch(Exception e) {
+            return false;
+        }
+    }
+	
 }
