@@ -13,9 +13,9 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.jdt.ui,
  org.eclipse.m2e.launching;bundle-version="1.2.0",
  org.eclipse.debug.ui;bundle-version="3.7.102",
- org.apache.sling.ide.eclipse-core;bundle-version="0.0.1",
- org.apache.sling.ide.eclipse-m2e-ui;bundle-version="0.0.1",
- org.apache.sling.ide.eclipse-ui;bundle-version="0.0.1"
+ org.apache.sling.ide.eclipse-core;bundle-version="[1.0.0,2.0.0)",
+ org.apache.sling.ide.eclipse-m2e-ui;bundle-version="[1.0.0,2.0.0)",
+ org.apache.sling.ide.eclipse-ui;bundle-version="[1.0.0,2.0.0)"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Import-Package: org.apache.maven.artifact.repository,
  org.apache.maven.model,
