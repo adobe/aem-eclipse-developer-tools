@@ -40,7 +40,7 @@
     <dependency>
       <groupId>org.apache.sling.ide</groupId>
       <artifactId>reactor</artifactId>
-      <version>1.0.0-SNAPSHOT</version>
+      <version>1.0.2-SNAPSHOT</version>
       <type>pom</type>
     </dependency>
   </dependencies>
@@ -76,7 +76,7 @@
               <groupId>org.apache.sling.ide</groupId>
               <artifactId>org.apache.sling.ide.target-definition</artifactId>
               <!-- TODO - define own target definition -->
-              <version>1.0.0-SNAPSHOT</version>
+              <version>1.0.2-SNAPSHOT</version>
             </artifact>
           </target>
         </configuration>
