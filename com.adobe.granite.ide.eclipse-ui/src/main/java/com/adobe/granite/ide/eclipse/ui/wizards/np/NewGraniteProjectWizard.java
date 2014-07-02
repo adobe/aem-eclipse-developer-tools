@@ -37,7 +37,9 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.m2e.core.MavenPlugin;
 import org.eclipse.m2e.core.project.MavenUpdateRequest;
 import org.eclipse.wst.server.core.IServer;
@@ -98,6 +100,8 @@ public class NewGraniteProjectWizard extends AbstractNewMavenBasedSlingApplicati
 	private String calculateRelativePath(IProject from, IProject to) {
 		IPath fromPath = from.getRawLocation();
 		IPath toPath = to.getRawLocation();
+		toPath.setDevice(null);
+		fromPath.setDevice(null);
 		int ssc = fromPath.matchingFirstSegments(toPath);
 		fromPath = fromPath.removeFirstSegments(ssc);
 		toPath = toPath.removeFirstSegments(ssc);
@@ -127,8 +131,15 @@ public class NewGraniteProjectWizard extends AbstractNewMavenBasedSlingApplicati
 		newParent.setRelativePath(calculateRelativePath(p, parentProject));
 		newParent.setVersion(parent.getVersion());
 		model.setParent(newParent);
-		existingPom.delete(true, false, null);
-		MavenPlugin.getMavenModelManager().createMavenModel(p.getFile("pom.xml"), model);
+		// outright deletion doesn't work on windows as the process has a ref to the file itself
+		// so creating a temp '_newpom_.xml'
+		final IFile newPom = p.getFile("_newpom_.xml");
+		MavenPlugin.getMavenModelManager().createMavenModel(newPom, model);
+		// then copying that content over to the pom.xml
+		existingPom.setContents(newPom.getContents(), true,  true, new NullProgressMonitor());
+		// and deleting the temp pom
+		newPom.delete(true,  false, new NullProgressMonitor());
+		
 	}
 
 	@Override
@@ -172,12 +183,20 @@ public class NewGraniteProjectWizard extends AbstractNewMavenBasedSlingApplicati
 			Properties props = model.getProperties();
 			props.put("granite.host", server.getHost());
 			props.put("granite.port", String.valueOf(server.getAttribute(ISlingLaunchpadServer.PROP_PORT, 4502)));
-			existingPom.delete(true, false, null);
-			MavenPlugin.getMavenModelManager().createMavenModel(parentProject.getFile("pom.xml"), model);
+			// cannot delete existingPom directly, as that might be locked (eg on windows)
+			final IFile tmpfile = parentProject.getFile("_newpom_.xml");
+			MavenPlugin.getMavenModelManager().createMavenModel(tmpfile, model);
+			// then copying that content over to the pom.xml
+			existingPom.setContents(tmpfile.getContents(), true,  true, new NullProgressMonitor());
+			// and deleting the temp pom
+			tmpfile.delete(true,  false, new NullProgressMonitor());
 		}
 
+		// once do a normal 'update project'
+		updateProjectConfigurations(projects, false, monitor);
+		// then do one with a 'force update snapshot/releases'
 		updateProjectConfigurations(projects, true, monitor);
-		
+
 		super.finishConfiguration(projects, server, monitor);
 	}
 
@@ -198,9 +217,16 @@ public class NewGraniteProjectWizard extends AbstractNewMavenBasedSlingApplicati
                     return true;
                 }
             }
-            reportError(new CoreException(new Status(IStatus.ERROR, Activator.PLUGIN_ID, 
-                    "Could not find repo.adobe.com as a configured repository (double-check settings.xml as per http://helpx.adobe.com/experience-manager/kb/SetUpTheAdobeMavenRepository.html)")));
-            return false;
+            if (!MessageDialog.openQuestion(getShell(), "Could not find repo.adobe.com in settings.xml",
+                    "Could not find repo.adobe.com or *.adobe.com as a configured repository. Please note that you need direct or indirect access to an adobe.com repository.\n\n"+
+                            "For details on how to setup repo.adobe.com please visit http://helpx.adobe.com/experience-manager/kb/SetUpTheAdobeMavenRepository.html\n\n"+
+                            "Would you still like to continue?")) {
+                reportError(new CoreException(new Status(IStatus.ERROR, Activator.PLUGIN_ID, 
+                        "Could not find repo.adobe.com as a configured repository (double-check settings.xml as per http://helpx.adobe.com/experience-manager/kb/SetUpTheAdobeMavenRepository.html)")));
+                return false;
+            } else {
+                return true;
+            }
         } catch (CoreException e) {
             reportError(e);
             return false;
