@@ -32,13 +32,17 @@ import org.apache.sling.ide.eclipse.ui.wizards.np.AbstractNewMavenBasedSlingAppl
 import org.apache.sling.ide.eclipse.ui.wizards.np.ArchetypeParametersWizardPage;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IWorkspaceRunnable;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.m2e.core.MavenPlugin;
 import org.eclipse.m2e.core.project.MavenUpdateRequest;
@@ -164,11 +168,16 @@ public class NewGraniteProjectWizard extends AbstractNewMavenBasedSlingApplicati
 		super.configureBundleProject(aBundleProject, projects, monitor);
 	}
 
-	protected void updateProjectConfigurations(List<IProject> projects, boolean forceDependencyUpdate, IProgressMonitor monitor) throws CoreException {
+	protected void updateProjectConfigurations(List<IProject> projects, final boolean forceDependencyUpdate, IProgressMonitor monitor) throws CoreException {
         for (Iterator<IProject> it = projects.iterator(); it.hasNext();) {
-            IProject project = it.next();
-            MavenPlugin.getProjectConfigurationManager().updateProjectConfiguration(new MavenUpdateRequest(project, /*mavenConfiguration.isOffline()*/false, forceDependencyUpdate), monitor);
-            project.build(IncrementalProjectBuilder.CLEAN_BUILD, monitor);
+            final IProject project = it.next();
+            final SubProgressMonitor subMonitor = new SubProgressMonitor(monitor, 1,
+                    SubProgressMonitor.SUPPRESS_SUBTASK_LABEL);
+            project.refreshLocal(IResource.DEPTH_INFINITE, subMonitor);
+            MavenPlugin.getProjectConfigurationManager().updateProjectConfiguration(new MavenUpdateRequest(project, /*mavenConfiguration.isOffline()*/false, forceDependencyUpdate), subMonitor);
+            project.build(IncrementalProjectBuilder.CLEAN_BUILD, subMonitor);
+            project.build(IncrementalProjectBuilder.FULL_BUILD, subMonitor);
+            MavenPlugin.getProjectConfigurationManager().updateProjectConfiguration(new MavenUpdateRequest(project, /*mavenConfiguration.isOffline()*/false, forceDependencyUpdate), subMonitor);
         }
     }
 	
@@ -192,9 +201,6 @@ public class NewGraniteProjectWizard extends AbstractNewMavenBasedSlingApplicati
 			tmpfile.delete(true,  false, new NullProgressMonitor());
 		}
 
-		// once do a normal 'update project'
-		updateProjectConfigurations(projects, false, monitor);
-		// then do one with a 'force update snapshot/releases'
 		updateProjectConfigurations(projects, true, monitor);
 
 		super.finishConfiguration(projects, server, monitor);
