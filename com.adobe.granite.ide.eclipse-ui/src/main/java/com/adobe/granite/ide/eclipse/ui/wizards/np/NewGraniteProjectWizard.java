@@ -171,13 +171,11 @@ public class NewGraniteProjectWizard extends AbstractNewMavenBasedSlingApplicati
 	protected void updateProjectConfigurations(List<IProject> projects, final boolean forceDependencyUpdate, IProgressMonitor monitor) throws CoreException {
         for (Iterator<IProject> it = projects.iterator(); it.hasNext();) {
             final IProject project = it.next();
-            final SubProgressMonitor subMonitor = new SubProgressMonitor(monitor, 1,
-                    SubProgressMonitor.SUPPRESS_SUBTASK_LABEL);
-            project.refreshLocal(IResource.DEPTH_INFINITE, subMonitor);
-            MavenPlugin.getProjectConfigurationManager().updateProjectConfiguration(new MavenUpdateRequest(project, /*mavenConfiguration.isOffline()*/false, forceDependencyUpdate), subMonitor);
-            project.build(IncrementalProjectBuilder.CLEAN_BUILD, subMonitor);
-            project.build(IncrementalProjectBuilder.FULL_BUILD, subMonitor);
-            MavenPlugin.getProjectConfigurationManager().updateProjectConfiguration(new MavenUpdateRequest(project, /*mavenConfiguration.isOffline()*/false, forceDependencyUpdate), subMonitor);
+            project.refreshLocal(IResource.DEPTH_INFINITE, monitor);
+            project.build(IncrementalProjectBuilder.FULL_BUILD, monitor);
+            MavenPlugin.getProjectConfigurationManager().updateProjectConfiguration(new MavenUpdateRequest(project, /*mavenConfiguration.isOffline()*/false, forceDependencyUpdate), monitor);
+            project.build(IncrementalProjectBuilder.CLEAN_BUILD, monitor);
+//            MavenPlugin.getProjectConfigurationManager().updateProjectConfiguration(new MavenUpdateRequest(project, /*mavenConfiguration.isOffline()*/false, forceDependencyUpdate), monitor);
         }
     }
 	
