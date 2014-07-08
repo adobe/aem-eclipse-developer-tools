@@ -49,11 +49,6 @@
          </perspectiveShortcut>
       </perspectiveExtension>
    </extension>
-   <extension
-         point="org.eclipse.ui.startup">
-      <startup></startup>
-   </extension>
-
 
 	<!-- Hide various Sling UI contributions --> 
    <extension
