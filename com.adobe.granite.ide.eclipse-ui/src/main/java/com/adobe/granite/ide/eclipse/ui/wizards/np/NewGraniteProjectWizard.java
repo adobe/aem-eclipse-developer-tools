@@ -46,6 +46,7 @@ import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.m2e.core.MavenPlugin;
 import org.eclipse.m2e.core.project.MavenUpdateRequest;
+import org.eclipse.wst.server.core.IModule;
 import org.eclipse.wst.server.core.IServer;
 
 import com.adobe.granite.ide.eclipse.ui.Activator;
@@ -145,6 +146,14 @@ public class NewGraniteProjectWizard extends AbstractNewMavenBasedSlingApplicati
 		newPom.delete(true,  false, new NullProgressMonitor());
 		
 	}
+	
+	@Override
+	protected boolean shouldDeploy(IModule module) {
+	    if (module.getProject().getName().contains("serversidetests.tests")) {
+	        return false;
+	    }
+	    return super.shouldDeploy(module);
+	}
 
 	@Override
 	protected void configureContentProject(IProject aContentProject,
@@ -171,9 +180,13 @@ public class NewGraniteProjectWizard extends AbstractNewMavenBasedSlingApplicati
 	protected void updateProjectConfigurations(List<IProject> projects, final boolean forceDependencyUpdate, IProgressMonitor monitor) throws CoreException {
         for (Iterator<IProject> it = projects.iterator(); it.hasNext();) {
             final IProject project = it.next();
+            monitor.beginTask("Refreshing "+project.getName(), 2);
             project.refreshLocal(IResource.DEPTH_INFINITE, monitor);
+            monitor.beginTask("Building "+project.getName(), 2);
             project.build(IncrementalProjectBuilder.FULL_BUILD, monitor);
+            monitor.beginTask("Updating "+project.getName(), 2);
             MavenPlugin.getProjectConfigurationManager().updateProjectConfiguration(new MavenUpdateRequest(project, /*mavenConfiguration.isOffline()*/false, forceDependencyUpdate), monitor);
+            monitor.beginTask("Cleaning "+project.getName(), 2);
             project.build(IncrementalProjectBuilder.CLEAN_BUILD, monitor);
 //            MavenPlugin.getProjectConfigurationManager().updateProjectConfiguration(new MavenUpdateRequest(project, /*mavenConfiguration.isOffline()*/false, forceDependencyUpdate), monitor);
         }
