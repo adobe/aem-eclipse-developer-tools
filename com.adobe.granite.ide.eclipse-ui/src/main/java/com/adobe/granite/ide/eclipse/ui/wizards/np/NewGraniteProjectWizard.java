@@ -182,13 +182,10 @@ public class NewGraniteProjectWizard extends AbstractNewMavenBasedSlingApplicati
             final IProject project = it.next();
             monitor.beginTask("Refreshing "+project.getName(), 2);
             project.refreshLocal(IResource.DEPTH_INFINITE, monitor);
-            monitor.beginTask("Building "+project.getName(), 2);
-            project.build(IncrementalProjectBuilder.FULL_BUILD, monitor);
             monitor.beginTask("Updating "+project.getName(), 2);
             MavenPlugin.getProjectConfigurationManager().updateProjectConfiguration(new MavenUpdateRequest(project, /*mavenConfiguration.isOffline()*/false, forceDependencyUpdate), monitor);
             monitor.beginTask("Cleaning "+project.getName(), 2);
             project.build(IncrementalProjectBuilder.CLEAN_BUILD, monitor);
-//            MavenPlugin.getProjectConfigurationManager().updateProjectConfiguration(new MavenUpdateRequest(project, /*mavenConfiguration.isOffline()*/false, forceDependencyUpdate), monitor);
         }
     }
 	
@@ -219,9 +216,11 @@ public class NewGraniteProjectWizard extends AbstractNewMavenBasedSlingApplicati
 
 	@Override
 	public boolean performFinish() {
-	    if (!assertPublicRepoConfigured()) {
-	        return false;
-	    }
+	    //TODO: Disabling this check for now - remove completely at later stage if 
+	    // problems with initial-newproject-on-windows is fixed
+//	    if (!assertPublicRepoConfigured()) {
+//	        return false;
+//	    }
 	    return super.performFinish();
 	}
 
