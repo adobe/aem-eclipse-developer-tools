@@ -46,10 +46,10 @@ public class Activator extends AbstractUIPlugin {
 		super.start(context);
 		plugin = this;
 
-        WhitelabelSupport.setWizardBanner(SharedImages.GRANITE_MEDIUM_LOGO);
-        WhitelabelSupport.setProjectWizardBanner(SharedImages.GRANITE_MEDIUM_LOGO);
+        WhitelabelSupport.setWizardBanner(SharedImages.AEM_MEDIUM_LOGO);
+        WhitelabelSupport.setProjectWizardBanner(SharedImages.AEM_MEDIUM_LOGO);
         WhitelabelSupport.setJcrNodeIcon(SharedImages.NT_UNSTRUCTURED);
-        WhitelabelSupport.setProductIcon(SharedImages.GRANITE_ICON);
+        WhitelabelSupport.setProductIcon(SharedImages.AEM_ICON);
         WhitelabelSupport.setProductName("AEM");
 	}
 

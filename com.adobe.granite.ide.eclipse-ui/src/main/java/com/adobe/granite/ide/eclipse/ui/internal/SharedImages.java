@@ -31,10 +31,11 @@ import com.adobe.granite.ide.eclipse.ui.Activator;
  */
 public final class SharedImages {
     
-    public static final ImageDescriptor GRANITE_MEDIUM_LOGO = ImageDescriptor.createFromFile(SharedImages.class, "granitemedium.png");
+    public static final ImageDescriptor AEM_MEDIUM_LOGO = createImageDescriptor(Activator.getDefault().getBundle(),
+            Path.fromPortableString("icons/mc_experiencemanager_transp_medium.png"));
     public static final ImageDescriptor NT_UNSTRUCTURED = ImageDescriptor.createFromFile(SharedImages.class, "unstructured.png");
-    public static final ImageDescriptor GRANITE_ICON = createImageDescriptor(Activator.getDefault().getBundle(),
-            Path.fromPortableString("icons/granitesmall.png"));
+    public static final ImageDescriptor AEM_ICON = createImageDescriptor(Activator.getDefault().getBundle(),
+            Path.fromPortableString("icons/mc_experiencemanager_transp.png"));
 
     public static ImageDescriptor createImageDescriptor(Bundle bundle, IPath path) {
         URL url = FileLocator.find(bundle, path, null);
