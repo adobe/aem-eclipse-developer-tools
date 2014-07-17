@@ -149,7 +149,7 @@ public class NewGraniteProjectWizard extends AbstractNewMavenBasedSlingApplicati
 	
 	@Override
 	protected boolean shouldDeploy(IModule module) {
-	    if (module.getProject().getName().contains("serversidetests.tests")) {
+	    if (module.getProject().getName().contains("it.tests")) {
 	        return false;
 	    }
 	    return super.shouldDeploy(module);
