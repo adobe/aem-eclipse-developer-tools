@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/org.apache.sling.ide.feature_1.0.1.qualifier.jar" id="org.apache.sling.ide.feature" version="1.0.1.qualifier">
+   <feature url="features/org.apache.sling.ide.feature_1.0.2.jar" id="org.apache.sling.ide.feature" version="1.0.2">
       <category name="sling"/>
    </feature>
-   <feature url="features/org.apache.sling.ide.m2e-feature_1.0.1.qualifier.jar" id="org.apache.sling.ide.m2e-feature" version="1.0.1.qualifier">
+   <feature url="features/org.apache.sling.ide.m2e-feature_1.0.2.jar" id="org.apache.sling.ide.m2e-feature" version="1.0.2">
       <category name="sling"/>
    </feature>
    <bundle id="com.adobe.granite.ide.eclipse-ui" version="0.0.0">
