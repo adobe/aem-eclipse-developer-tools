@@ -1,1 +1,173 @@
-html{font:300 1em/1.4 adobe-clean,sans-serif}body{margin:0 0 8em;color:#222}a:focus{outline:thin dotted}a:active,a:hover{outline:0}img{border:0;-ms-interpolation-mode:bicubic}h1,h2{font-weight:300}h1{font-size:3em;margin:.67em 0}h2{font-size:2em;margin:1em 0}p{margin:1em 0}strong{font-weight:400}.page-wrapper{max-width:58em;margin:0 auto;padding:0 1em}.clearfix:before,.clearfix:after{content:" ";display:table}.clearfix:after{clear:both}.clearfix{*zoom:1}#title{margin-bottom:4em;color:#eee;background:#393661}#title .page-wrapper{position:relative;padding-bottom:4em}#title-top,#title a{color:#fff}#title-text,#title-docs{margin-right:400px}#title-eclipse{position:absolute;right:1em;bottom:-136px}#install section{width:40%;padding-right:10%;float:left}#install-link{margin-top:2em}#install-link a{display:inline-block;border:1px solid #4d627e;padding:.5em 2em;color:#fff;background:#3280c8;text-decoration:none}@media only screen and (max-width: 720px){body{margin-bottom:4em}#title{margin-bottom:1em}#title-text,#title-docs{margin-right:0}#title-eclipse{display:none}}@media only screen and (max-width: 500px){body{margin-bottom:2em}h1{font-size:2em;margin:1em 0}#title{margin-bottom:0}#title .page-wrapper{padding-bottom:2em}}
+
+/* GENERAL ********************************/
+
+html {
+    font: 300 1em/1.4 "adobe-clean", sans-serif;
+}
+body {
+    margin: 0 0 8em;
+    color: #222;
+}
+
+a:focus {
+    outline: thin dotted;
+}
+a:active,
+a:hover {
+    outline: 0;
+}
+
+img {
+    border: 0;
+    -ms-interpolation-mode: bicubic;
+}
+
+h1,
+h2,
+h3 {
+    font-weight: 300;
+}
+h1 {
+    font-size: 3em;
+    margin: 0.67em 0;
+}
+h2 {
+    font-size: 2em;
+    margin: 1em 0;
+}
+h3 {
+    font-size: 1.5em;
+    margin: 1em 0;
+}
+p {
+    margin: 1em 0;
+}
+strong {
+    font-weight: normal;
+}
+
+/* LAYOUT ********************************/
+
+.page-wrapper {
+    max-width: 58em;
+    margin: 0 auto;
+    padding: 0 1em;
+}
+
+.clearfix:before,
+.clearfix:after {
+    content: " ";
+    display: table;
+}
+.clearfix:after {
+    clear: both;
+}
+
+/*
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+
+.clearfix {
+    *zoom: 1;
+}
+
+/* TITLE ********************************/
+
+#title {
+    margin-bottom: 4em;
+    color: #eee;
+    background: #393661;
+}
+#title .page-wrapper {
+    position: relative;
+    padding-bottom: 4em;
+}
+#title-top,
+#title a {
+    color: #fff;
+}
+#title-text,
+#title-docs {
+    margin-right: 400px;
+}
+#title-eclipse {
+    position: absolute;
+    right: 1em;
+    bottom: -136px;
+}
+
+/* COLUMNS ********************************/
+.leftcol {
+	float: left;
+	width: 45%;
+}
+.rightcol {
+	float: right;
+	width: 45%;
+}
+
+
+/* INSTALL ********************************/
+
+#install section {
+    width: 40%;
+    padding-right: 10%;
+    float: left;
+}
+#install-link {
+    margin-top: 2em;
+}
+#install-link a {
+    display: inline-block;
+    border: 1px solid #4d627e;
+    padding: 0.5em 2em;
+    color: #fff;
+    background: #3280c8;
+    text-decoration: none;
+}
+#install-text {
+	min-height: 90px
+}
+
+/* RESPONSIVE ********************************/
+
+@media only screen and (max-width: 720px) {
+    body {
+        margin-bottom: 4em;
+    }
+    #title {
+        margin-bottom: 1em;
+    }
+    #title-text,
+    #title-docs {
+        margin-right: 0;
+    }
+    #title-eclipse {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    body {
+        margin-bottom: 2em;
+    }
+    h1 {
+        font-size: 2em;
+        margin: 1em 0;
+    }
+    #title {
+        margin-bottom: 0;
+    }
+    #title .page-wrapper {
+        padding-bottom: 2em;
+    }
+    .leftcol,
+    .rightcol {
+        float: none;
+        width: auto;
+    }
+    #install-text {
+        min-height: 0;
+    }
+}
