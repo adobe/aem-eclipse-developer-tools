@@ -16,7 +16,6 @@
 package com.adobe.granite.ide.eclipse.ui.wizards.np;
 
 import java.net.URI;
-import java.net.URL;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
@@ -27,22 +26,18 @@ import org.apache.maven.model.Model;
 import org.apache.maven.model.Parent;
 import org.apache.sling.ide.eclipse.core.ISlingLaunchpadServer;
 import org.apache.sling.ide.eclipse.core.internal.ProjectHelper;
-import org.apache.sling.ide.eclipse.m2e.EmbeddedArchetypeInstaller;
 import org.apache.sling.ide.eclipse.ui.wizards.np.AbstractNewMavenBasedSlingApplicationWizard;
 import org.apache.sling.ide.eclipse.ui.wizards.np.ArchetypeParametersWizardPage;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IWorkspaceRunnable;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.m2e.core.MavenPlugin;
 import org.eclipse.m2e.core.project.MavenUpdateRequest;
@@ -59,34 +54,17 @@ public class NewGraniteProjectWizard extends AbstractNewMavenBasedSlingApplicati
 	}
 	
 	@Override
-	public void installArchetypes() {
-	    EmbeddedArchetypeInstaller archetypeInstaller = new EmbeddedArchetypeInstaller(
-	    		"com.adobe.granite.archetypes", "sample-project-archetype", "7");
-	    try {
-	    	URL jarUrl = Activator.getDefault().getBundle().getResource(
-	    			"target/sample-project-archetype/sample-project-archetype-7.jar");
-			archetypeInstaller.addResource("jar", jarUrl);
-			URL pomUrl = Activator.getDefault().getBundle().getResource(
-					"target/sample-project-archetype/sample-project-archetype-7.pom");
-			archetypeInstaller.addResource("pom", pomUrl);
-			
-			archetypeInstaller.installArchetype();
-		} catch (Exception e) {
-			// TODO proper logging
-			e.printStackTrace();
-		}
-	    
-	}
-	
-	@Override
+    public void installArchetypes() {
+        // nothing to do
+    }
+
+    @Override
 	protected ArchetypeParametersWizardPage createArchetypeParametersWizardPage() {
         return new SimplerParametersWizardPage(this);
 	}
 
 	@Override
 	public boolean acceptsArchetype(Archetype archetype2) {
-		//TODO: could further restrict it to only accept the slingclipse-embedded one
-		// but then it would be better to remove the archetype selection wizard page entirely
 		return (archetype2.getGroupId().startsWith("com.adobe.granite.archetypes") );
 	}
 	
