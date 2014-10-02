@@ -171,7 +171,7 @@ public class NewGraniteProjectWizard extends AbstractNewMavenBasedSlingApplicati
 	protected void finishConfiguration(List<IProject> projects, IServer server,
 			IProgressMonitor monitor) throws CoreException {
 		IProject parentProject = getParentProject(projects);
-		if (parentProject!=null) {
+        if (parentProject != null && server != null) {
 			// set granite.host and granite.port
 			IFile existingPom = parentProject.getFile("pom.xml");
 			Model model = MavenPlugin.getMavenModelManager().readMavenModel(existingPom);
