@@ -21,6 +21,8 @@ import org.apache.maven.archetype.catalog.Archetype;
 import org.apache.sling.ide.eclipse.ui.wizards.np.AbstractNewMavenBasedSlingApplicationWizard;
 import org.apache.sling.ide.eclipse.ui.wizards.np.ArchetypeParametersWizardPage;
 import org.apache.sling.ide.eclipse.ui.wizards.np.ChooseArchetypeWizardPage;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
@@ -180,6 +182,14 @@ public class SimplerParametersWizardPage extends ArchetypeParametersWizardPage {
             updateStatus("package must be specified");
             return;
         }
+
+        IProject existingProject = ResourcesPlugin.getWorkspace().getRoot().getProject(artifactId.getText());
+
+        if (existingProject.exists()) {
+            updateStatus("A project with the name " + artifactId.getText() + " already exists.");
+            return;
+        }
+
         int cnt = advancedSettings.propertiesTable.getItemCount();
         for (int i = 0; i < cnt; i++) {
             TableItem item = advancedSettings.propertiesTable.getItem(i);
