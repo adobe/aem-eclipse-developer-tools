@@ -29,6 +29,7 @@
   <properties>
     <tycho.version>0.18.1</tycho.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <update.site.suffix>/</update.site.suffix>
   </properties>
 
   <modules>
@@ -97,6 +98,8 @@
         </pluginRepository>
     </pluginRepositories>
 
+
+
     <profiles>
         <!--
             Documentation on signing can be viewed in the Sling IDE Tooling README at
@@ -126,6 +129,13 @@
                     </plugin>
                 </plugins>
             </build>
+        </profile>
+        <!-- used to built a preview update site -->
+        <profile>
+            <id>preview</id>
+            <properties>
+                <update.site.suffix>/preview/</update.site.suffix>
+            </properties>
         </profile>
     </profiles>
 </project>
