@@ -33,6 +33,7 @@
   </properties>
 
   <modules>
+    <module>com.adobe.granite.ide.target-definition</module>
     <module>com.adobe.granite.ide.eclipse-ui</module>
     <module>com.adobe.granite.ide.feature</module>
     <module>com.adobe.granite.ide.p2update</module>
@@ -80,10 +81,9 @@
         <configuration>
           <target>
             <artifact>
-              <groupId>org.apache.sling.ide</groupId>
-              <artifactId>org.apache.sling.ide.target-definition</artifactId>
-              <!-- TODO - define own target definition -->
-              <version>1.0.2</version>
+              <groupId>com.adobe.granite.ide</groupId>
+              <artifactId>com.adobe.granite.ide.target-definition</artifactId>
+              <version>${project.version}</version>
             </artifact>
           </target>
         </configuration>
