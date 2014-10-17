@@ -27,7 +27,7 @@
   <name>Granite IDE Tools: Reactor</name>
 
   <properties>
-    <tycho.version>0.18.1</tycho.version>
+    <tycho.version>0.21.0</tycho.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <update.site.suffix>/</update.site.suffix>
   </properties>
