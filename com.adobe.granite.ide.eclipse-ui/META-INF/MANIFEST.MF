@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: AEM IDE Tools: UI-Extensions
 Bundle-SymbolicName: com.adobe.granite.ide.eclipse-ui;singleton:=true
-Bundle-Version: 1.0.2
+Bundle-Version: 1.0.3.qualifier
 Bundle-Activator: com.adobe.granite.ide.eclipse.ui.Activator
 Bundle-Vendor: ADOBE
 Require-Bundle: org.eclipse.ui,
