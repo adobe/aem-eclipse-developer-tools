@@ -209,6 +209,11 @@
    limitations under the License.
    </license>
 
+   <requires>
+      <import feature="org.apache.sling.ide.feature" version="1.0.4" match="greaterOrEqual"/>
+      <import feature="org.apache.sling.ide.m2e-feature" version="1.0.4" match="greaterOrEqual"/>
+   </requires>
+
    <plugin
          id="com.adobe.granite.ide.eclipse-ui"
          download-size="0"
