@@ -26,6 +26,18 @@
 
   <name>Granite IDE Tools: Reactor</name>
 
+  <inceptionYear>2014</inceptionYear>
+  <licenses>
+      <license>
+        <name>The Apache Software License, Version 2.0</name>
+          <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      </license>
+  </licenses>
+  <organization>
+      <name>Adobe</name>
+      <url>http://www.adobe.com/</url>
+  </organization>
+
   <properties>
     <tycho.version>0.21.0</tycho.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
