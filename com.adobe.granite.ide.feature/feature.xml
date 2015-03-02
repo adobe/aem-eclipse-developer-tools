@@ -2,7 +2,7 @@
 <feature
       id="com.adobe.granite.ide.feature"
       label="AEM Developer Tools"
-      version="1.0.3.qualifier"
+      version="1.0.4"
       provider-name="ADOBE">
 
    <license url="http://www.apache.org/licenses/LICENSE-2.0">
