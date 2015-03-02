@@ -125,7 +125,45 @@
             	<groupMarker name="aem"/>
             </menu>
          </objectContribution>
+      <objectContribution
+      		id="com.adobe.granite.eclipse.ide.openInCrxDeLite.browseableNode"
+            adaptable="true"
+            objectClass="org.apache.sling.ide.eclipse.ui.nav.model.JcrNode">
+         <action
+               class="com.adobe.granite.ide.eclipse.ui.internal.OpenInCrxDeLiteAction"
+               id="com.adobe.granite.eclipse.ide.openInCrxDeLiteAction"
+               label="Open in CRXDE Lite"
+               icon="icons/crxde_lite.gif"
+               menubarPath="jcr">
+         </action>
+         <visibility>
+               <objectState
+                     name="browseableNode"
+                     value="true">
+               </objectState>
+         </visibility>
+      </objectContribution>
+	  <objectContribution
+            adaptable="true"
+            id="com.adobe.granite.eclipse.ide.openInCrxDeLite.nonDomNode"
+            objectClass="org.apache.sling.ide.eclipse.ui.nav.model.JcrNode">
+         <action
+               class="com.adobe.granite.ide.eclipse.ui.internal.OpenInCrxDeLiteAction"
+               id="com.adobe.granite.eclipse.ide.openInCrxDeLiteAction"
+               label="Open in CRXDE Lite"
+               icon="icons/crxde_lite.gif"
+               toolbarPath="common.open.menu/jcr">
+         </action>
+         <visibility>
+               <objectState
+                     name="nonDomNode"
+                     value="true">
+               </objectState>
+         </visibility>
+      </objectContribution>      
   	</extension>
+  	
+  	
   	
   	<!-- Add AEM property page -->
    <extension point="org.eclipse.ui.propertyPages"> 
