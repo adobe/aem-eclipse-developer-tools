@@ -275,7 +275,7 @@
    </extension>
    
 	<extension point="org.eclipse.m2e.core.archetypeCatalogs">
-		<remote url="http://repo.adobe.com/nexus/content/groups/public/archetype-catalog.xml"
+		<remote url="https://repo.adobe.com/nexus/content/groups/public/archetype-catalog.xml"
 			description="Adobe Public Repository"/>
 	</extension>      
 </plugin>
