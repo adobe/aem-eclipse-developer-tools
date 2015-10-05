@@ -78,7 +78,7 @@ public class SimplerParametersWizardPage extends ArchetypeParametersWizardPage {
         GridData gd;
 
         label = new Label(container, SWT.NULL);
-        label.setText("&Name:");
+        label.setText("Na&me:");
         name = new Text(container, SWT.BORDER | SWT.SINGLE);
         gd = new GridData(GridData.FILL_HORIZONTAL);
         name.setLayoutData(gd);
