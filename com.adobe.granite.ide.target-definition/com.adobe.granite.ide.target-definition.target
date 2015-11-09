@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target name="Granite IDE Tools" sequenceNumber="45">
+<?pde version="3.8"?><target name="Granite IDE Tools" sequenceNumber="46">
 <locations>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.sonatype.tycho.m2e.feature.feature.group" version="0.6.0.201207302152"/>
@@ -28,9 +28,9 @@
 <repository location="http://download.eclipse.org/tools/orbit/downloads/drops/R20140114142710/repository/"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.apache.sling.ide.feature.feature.group" version="1.0.6"/>
-<unit id="org.apache.sling.ide.m2e-feature.feature.group" version="1.0.6"/>
-<repository location="https://dist.apache.org/repos/dist/release/sling/eclipse/1.0.6/"/>
+<unit id="org.apache.sling.ide.feature.feature.group" version="1.0.10"/>
+<unit id="org.apache.sling.ide.m2e-feature.feature.group" version="1.0.10"/>
+<repository location="https://dist.apache.org/repos/dist/release/sling/eclipse/1.0.10"/>
 </location>
 </locations>
 </target>
