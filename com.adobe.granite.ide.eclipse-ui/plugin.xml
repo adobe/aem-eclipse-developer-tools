@@ -277,5 +277,18 @@
 	<extension point="org.eclipse.m2e.core.archetypeCatalogs">
 		<remote url="https://repo.adobe.com/nexus/content/groups/public/archetype-catalog.xml"
 			description="Adobe Public Repository"/>
-	</extension>      
+	</extension>
+	
+	<!-- JSP templates -->
+    <!--======================================================================================-->
+    <!-- Templates                                                                            -->
+    <!--======================================================================================-->
+    <extension point="org.eclipse.ui.editors.templates">
+
+        <include
+            file="templates/jsp-templates.xml"
+            translations="templates/jsp-templates.properties"/>
+
+    </extension>
+	
 </plugin>
