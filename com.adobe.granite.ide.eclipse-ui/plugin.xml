@@ -280,15 +280,10 @@
 	</extension>
 	
 	<!-- JSP templates -->
-    <!--======================================================================================-->
-    <!-- Templates                                                                            -->
-    <!--======================================================================================-->
     <extension point="org.eclipse.ui.editors.templates">
-
         <include
             file="templates/jsp-templates.xml"
             translations="templates/jsp-templates.properties"/>
-
     </extension>
 	
 </plugin>
