@@ -19,17 +19,16 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.apache.sling.ide.eclipse.core.ISlingLaunchpadServer;
-import org.apache.sling.ide.eclipse.ui.browser.AbstractOpenInBrowserAction;
+import org.apache.sling.ide.eclipse.ui.browser.AbstractOpenInBrowserHandler;
 import org.apache.sling.ide.eclipse.ui.nav.model.JcrNode;
 import org.eclipse.wst.server.core.IServer;
 
-public class OpenInCrxDeLiteAction extends AbstractOpenInBrowserAction {
+public class OpenInCrxDeLiteHandler extends AbstractOpenInBrowserHandler{
 
     @Override
     protected URL getUrlToOpen(JcrNode node, IServer server) throws MalformedURLException {
 
-        return new URL("http", server.getHost(), 
-                server.getAttribute(ISlingLaunchpadServer.PROP_PORT, DefaultCQLaunchpadConfiguration.INSTANCE.getPort()),
+        return new URL("http", server.getHost(), server.getAttribute(ISlingLaunchpadServer.PROP_PORT, 8080),
                 "/crx/de/index.jsp#" + node.getJcrPath());
     }
 
