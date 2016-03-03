@@ -25,5 +25,6 @@ Import-Package: org.apache.sling.ide.eclipse.core,
  org.eclipse.ui.forms.widgets,
  org.eclipse.wst.common.project.facet.core,
  org.eclipse.wst.common.project.facet.core.internal,
- org.eclipse.wst.server.core
+ org.eclipse.wst.server.core,
+ org.eclipse.wst.server.ui.wizard
 Bundle-ActivationPolicy: lazy

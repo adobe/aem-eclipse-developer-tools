@@ -286,4 +286,13 @@
             translations="templates/jsp-templates.properties"/>
     </extension>
 	
+   <!-- hook in the server creation wizard -->
+    <extension
+          point="org.eclipse.wst.server.ui.wizardFragments">
+       <fragment
+             class="com.adobe.granite.ide.eclipse.ui.internal.ApplyDefaultCQServerValuesFragment"
+             id="com.adobe.granite.ide.eclipse.ui.ApplyDefaultCQServerValuesFragment"
+             typeIds="org.apache.sling.ide.launchpadServer">
+       </fragment>
+    </extension>	
 </plugin>
