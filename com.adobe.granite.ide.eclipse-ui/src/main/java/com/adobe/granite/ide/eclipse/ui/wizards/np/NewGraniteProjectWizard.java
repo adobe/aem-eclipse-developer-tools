@@ -147,41 +147,4 @@ public class NewGraniteProjectWizard extends AbstractNewMavenBasedSlingApplicati
 		}
 		super.configureBundleProject(aBundleProject, projects, monitor);
 	}
-
-	protected void updateProjectConfigurations(List<IProject> projects, final boolean forceDependencyUpdate, IProgressMonitor monitor) throws CoreException {
-        for (Iterator<IProject> it = projects.iterator(); it.hasNext();) {
-            final IProject project = it.next();
-            monitor.beginTask("Refreshing "+project.getName(), 2);
-            project.refreshLocal(IResource.DEPTH_INFINITE, monitor);
-            monitor.beginTask("Updating "+project.getName(), 2);
-            MavenPlugin.getProjectConfigurationManager().updateProjectConfiguration(new MavenUpdateRequest(project, /*mavenConfiguration.isOffline()*/false, forceDependencyUpdate), monitor);
-            monitor.beginTask("Cleaning "+project.getName(), 2);
-            project.build(IncrementalProjectBuilder.CLEAN_BUILD, monitor);
-        }
-    }
-	
-	@Override
-	protected void finishConfiguration(List<IProject> projects, IServer server,
-			IProgressMonitor monitor) throws CoreException {
-		IProject parentProject = getParentProject(projects);
-        if (parentProject != null && server != null) {
-			// set granite.host and granite.port
-			IFile existingPom = parentProject.getFile("pom.xml");
-			Model model = MavenPlugin.getMavenModelManager().readMavenModel(existingPom);
-			Properties props = model.getProperties();
-			props.put("granite.host", server.getHost());
-			props.put("granite.port", String.valueOf(server.getAttribute(ISlingLaunchpadServer.PROP_PORT, 4502)));
-			// cannot delete existingPom directly, as that might be locked (eg on windows)
-			final IFile tmpfile = parentProject.getFile("_newpom_.xml");
-			MavenPlugin.getMavenModelManager().createMavenModel(tmpfile, model);
-			// then copying that content over to the pom.xml
-			existingPom.setContents(tmpfile.getContents(), true,  true, new NullProgressMonitor());
-			// and deleting the temp pom
-			tmpfile.delete(true,  false, new NullProgressMonitor());
-		}
-
-		updateProjectConfigurations(projects, true, monitor);
-
-		super.finishConfiguration(projects, server, monitor);
-	}
 }
