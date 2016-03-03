@@ -17,27 +17,21 @@ package com.adobe.granite.ide.eclipse.ui.wizards.np;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.Properties;
 
 import org.apache.maven.archetype.catalog.Archetype;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.Parent;
-import org.apache.sling.ide.eclipse.core.ISlingLaunchpadServer;
 import org.apache.sling.ide.eclipse.core.internal.ProjectHelper;
 import org.apache.sling.ide.eclipse.ui.wizards.np.AbstractNewMavenBasedSlingApplicationWizard;
 import org.apache.sling.ide.eclipse.ui.wizards.np.ArchetypeParametersWizardPage;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.m2e.core.MavenPlugin;
-import org.eclipse.m2e.core.project.MavenUpdateRequest;
 import org.eclipse.wst.server.core.IModule;
-import org.eclipse.wst.server.core.IServer;
 
 public class NewGraniteProjectWizard extends AbstractNewMavenBasedSlingApplicationWizard {
 
