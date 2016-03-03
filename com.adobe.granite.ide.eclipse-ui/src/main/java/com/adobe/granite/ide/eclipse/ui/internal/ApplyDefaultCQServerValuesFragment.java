@@ -37,7 +37,7 @@ public class ApplyDefaultCQServerValuesFragment extends WizardFragment {
         if (server instanceof IServerWorkingCopy) {
             IServerWorkingCopy wc = (IServerWorkingCopy) server;
 
-            wc.setAttribute(ISlingLaunchpadServer.PROP_PORT, CQConfiguration.DEFAULT_PORT);
+            wc.setAttribute(ISlingLaunchpadServer.PROP_PORT, DefaultCQLaunchpadConfiguration.INSTANCE.getPort());
             
             wc.save(true, monitor);
         }

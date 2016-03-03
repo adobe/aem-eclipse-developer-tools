@@ -15,12 +15,14 @@
  */
 package com.adobe.granite.ide.eclipse.ui.internal;
 
-public abstract class CQConfiguration {
+import org.apache.sling.ide.eclipse.core.DefaultSlingLaunchpadConfiguration;
 
-    public static final int DEFAULT_PORT = 4502;
-    
-    private CQConfiguration() {
-        
+public class DefaultCQLaunchpadConfiguration extends DefaultSlingLaunchpadConfiguration {
+
+    public static final DefaultCQLaunchpadConfiguration INSTANCE = new DefaultCQLaunchpadConfiguration();
+
+    @Override
+    public int getPort() {
+        return 4502;
     }
-
 }

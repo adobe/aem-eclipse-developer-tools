@@ -28,7 +28,8 @@ public class OpenInCrxDeLiteAction extends AbstractOpenInBrowserAction {
     @Override
     protected URL getUrlToOpen(JcrNode node, IServer server) throws MalformedURLException {
 
-        return new URL("http", server.getHost(), server.getAttribute(ISlingLaunchpadServer.PROP_PORT, 8080),
+        return new URL("http", server.getHost(), 
+                server.getAttribute(ISlingLaunchpadServer.PROP_PORT, DefaultCQLaunchpadConfiguration.INSTANCE.getPort()),
                 "/crx/de/index.jsp#" + node.getJcrPath());
     }
 

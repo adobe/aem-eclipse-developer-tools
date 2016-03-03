@@ -21,6 +21,7 @@ import java.util.List;
 import org.apache.maven.archetype.catalog.Archetype;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.Parent;
+import org.apache.sling.ide.eclipse.core.ISlingLaunchpadConfiguration;
 import org.apache.sling.ide.eclipse.core.internal.ProjectHelper;
 import org.apache.sling.ide.eclipse.ui.wizards.np.AbstractNewMavenBasedSlingApplicationWizard;
 import org.apache.sling.ide.eclipse.ui.wizards.np.ArchetypeParametersWizardPage;
@@ -32,6 +33,8 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.m2e.core.MavenPlugin;
 import org.eclipse.wst.server.core.IModule;
+
+import com.adobe.granite.ide.eclipse.ui.internal.DefaultCQLaunchpadConfiguration;
 
 public class NewGraniteProjectWizard extends AbstractNewMavenBasedSlingApplicationWizard {
 
@@ -140,5 +143,10 @@ public class NewGraniteProjectWizard extends AbstractNewMavenBasedSlingApplicati
 			fixParentProject(aBundleProject, parentProject);
 		}
 		super.configureBundleProject(aBundleProject, projects, monitor);
+	}
+	
+	@Override
+	protected ISlingLaunchpadConfiguration getDefaultConfig() {
+	    return DefaultCQLaunchpadConfiguration.INSTANCE;
 	}
 }
