@@ -42,11 +42,6 @@ public class NewGraniteProjectWizard extends AbstractNewMavenBasedSlingApplicati
 	public String doGetWindowTitle() {
 		return "Create new Adobe AEM application";
 	}
-	
-	@Override
-    public void installArchetypes() {
-        // nothing to do
-    }
 
     @Override
 	protected ArchetypeParametersWizardPage createArchetypeParametersWizardPage() {
