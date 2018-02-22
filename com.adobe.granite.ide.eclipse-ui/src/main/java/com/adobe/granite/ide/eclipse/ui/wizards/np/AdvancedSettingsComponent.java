@@ -305,6 +305,8 @@ public class AdvancedSettingsComponent extends ExpandableComposite {
                 text = defaultAppsName;
             } else if (rp.getKey().equals("contentFolderName")) {
                 text = defaultAppsName;
+            } else if (rp.getKey().equals("confFolderName")) {
+                text = defaultAppsName;
             } else if (rp.getKey().equals("cssId")) {
                 text = artifactId;
             } else if (rp.getKey().equals("componentGroupName")) {
