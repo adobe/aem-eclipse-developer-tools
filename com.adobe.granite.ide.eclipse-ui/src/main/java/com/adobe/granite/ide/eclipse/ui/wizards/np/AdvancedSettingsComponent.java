@@ -17,6 +17,7 @@ package com.adobe.granite.ide.eclipse.ui.wizards.np;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 import org.apache.maven.archetype.catalog.Archetype;
 import org.apache.maven.archetype.metadata.RequiredProperty;
@@ -59,6 +60,8 @@ public class AdvancedSettingsComponent extends ExpandableComposite {
     private static final String KEY_PROPERTY = "key";
 
     private static final String VALUE_PROPERTY = "value";
+
+    private static final String OPTION_INCLUDE_EXAMPLES_DEFAULT = "y";
 
     Text javaPackage;
 
@@ -270,58 +273,59 @@ public class AdvancedSettingsComponent extends ExpandableComposite {
 
     }
 
-    public void handleModifyText() {
+    @SuppressWarnings("restriction")
+	public void handleModifyText() {
         final String artifactId = wizardPage.getArtifactId();
         final String groupId = wizardPage.getGroupId();
-        final String name = wizardPage.getParameterName();
-        
-        final String defaultJavaPackage;
-        if (artifactId.length() == 0) {
-            defaultJavaPackage = SimplerParametersWizardPage
-                    .getDefaultJavaPackage(
-                            groupId, "");
-        } else {
-            defaultJavaPackage = SimplerParametersWizardPage
-                    .getDefaultJavaPackage(
-                            groupId,
-                            artifactId);
-        }
-        
-        String defaultAppsName = name.toLowerCase();
-        defaultAppsName = defaultAppsName.replaceAll("[^a-zA-Z]", "");
-        
+        final String defaultJavaPackage = SimplerParametersWizardPage.getDefaultJavaPackage(groupId, artifactId);
+
+        ListIterator<RequiredProperty> propertiesIterator = properties.listIterator();
         Table table = propertiesViewer.getTable();
-        table.setItemCount(properties.size());
         int i = 0;
-        for (Iterator<RequiredProperty> it = properties.iterator(); it
-                .hasNext();) {
-            final RequiredProperty rp = it.next();
-            final String text;
-            if (rp.getKey().equals("artifactName")) {
-                text = name;
-            } else if (rp.getKey().equals("packageGroup")) {
-                text = name+" Content Package";
-            } else if (rp.getKey().equals("appsFolderName")) {
-                text = defaultAppsName;
-            } else if (rp.getKey().equals("contentFolderName")) {
-                text = defaultAppsName;
-            } else if (rp.getKey().equals("confFolderName")) {
-                text = defaultAppsName;
-            } else if (rp.getKey().equals("cssId")) {
-                text = artifactId;
-            } else if (rp.getKey().equals("componentGroupName")) {
-                text = name+" Components";
-            } else if (rp.getKey().equals("siteName")) {
-                text = name+" Site";
+
+        while (propertiesIterator.hasNext()) {
+            String text;
+            RequiredProperty rp = propertiesIterator.next();
+            Property key = Property.fromString(rp.getKey());
+            String defaultValue = artifactId;
+            if (artifactId.contains(".")) {
+                defaultValue = artifactId.substring(artifactId.lastIndexOf(".") + 1);
+            }
+
+            if (key != null) {
+                switch (key) {
+                    case APPS_FOLDER_NAME:
+                    case ARTIFACT_NAME:
+                    case PACKAGE_GROUP:
+                    case CONTENT_FOLDER_NAME:
+                    case CONF_FOLDER_NAME:
+                    case CSS_ID:
+                    case COMPONENT_GROUP_NAME:
+                    case SITE_NAME:
+                        text = defaultValue;
+                        break;
+                    case ARTIFACT_ID:
+                        text = artifactId;
+                        break;
+                    case GROUP_ID:
+                        text = groupId;
+                        break;
+                    case OPTION_INCLUDE_EXAMPLES:
+                        text = OPTION_INCLUDE_EXAMPLES_DEFAULT;
+                        break;
+                    default:
+                        continue;
+                }
             } else {
                 continue;
             }
-            // create or reuse:
+
             TableItem item = table.getItem(i++);
             item.setText(0, rp.getKey());
             item.setText(1, text);
             item.setData(item);
         }
+
         if (!javaPackageModified) {
             javaPackage.setText(defaultJavaPackage);
         }
