@@ -92,7 +92,7 @@ public class SimplerParametersWizardPage extends ArchetypeParametersWizardPage {
                     name.setForeground(container.getForeground());
                 }
                 dialogChanged();
-                advancedSettings.handleModifyText();
+                advancedSettings.handleModifyText(AdvancedSettingsComponent.APP_TITLE, name.getText(), false);
             }
         });
 
@@ -110,7 +110,7 @@ public class SimplerParametersWizardPage extends ArchetypeParametersWizardPage {
                     groupId.setForeground(container.getForeground());
                 }
                 dialogChanged();
-                advancedSettings.handleModifyText();
+                advancedSettings.handleModifyText(AdvancedSettingsComponent.GROUP_ID, groupId.getText(), false);
             }
         });
         groupId.setToolTipText("Enter a package-like identifier, eg org.myorg");
@@ -130,7 +130,7 @@ public class SimplerParametersWizardPage extends ArchetypeParametersWizardPage {
                     artifactId.setForeground(container.getForeground());
                 }
                 dialogChanged();
-                advancedSettings.handleModifyText();
+                advancedSettings.handleModifyText(AdvancedSettingsComponent.ARTIFACT_ID, artifactId.getText(), false);
             }
         });
         artifactId.setToolTipText("Enter an identifier (without '.') of the project");
@@ -244,6 +244,18 @@ public class SimplerParametersWizardPage extends ArchetypeParametersWizardPage {
             p.put(item.getText(0), item.getText(1));
         }
         return p;
+    }
+    
+    public void setGroupId(String text) {
+    	groupId.setText(text);
+    	groupIdChanged = true;
+    	dialogChanged();
+    }
+    
+    public void setArtifactId(String text) {
+    	artifactId.setText(text);
+    	artifactIdChanged = true;
+    	dialogChanged();
     }
 
 }
