@@ -1,8 +1,7 @@
 sudo: false
-dist: precise
 language: java
 install: true
-jdk: openjdk7
+jdk: openjdk9
 script: mvn verify
 cache:
   directories:
