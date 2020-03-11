@@ -285,7 +285,8 @@ public class AdvancedSettingsComponent extends ExpandableComposite {
                 if (!rp.getKey().equals(item.getText())) {
                     // then create it - otherwise, reuse it
                     item.setText(0, rp.getKey());
-                    item.setText(1, rp.getDefaultValue() != null ? rp.getDefaultValue() : "");
+                    rp.setValue(rp.getDefaultValue());
+                    item.setText(1, rp.getValue() != null ? rp.getValue() : "");
                     item.setText(2, rp.getDefaultValue() != null ? rp.getDefaultValue() : "");
                     item.setData(item);
                 }
@@ -318,9 +319,9 @@ public class AdvancedSettingsComponent extends ExpandableComposite {
     		if (propertyKey.equals(property.getKey())) {
     			property.setValue(newValue);
     		} else if (!property.isModified()) {
-    			String defaultValue = property.getDefaultValue();
-    			if (defaultValue != null && defaultValue.contains("${" + propertyKey + "}")) {
-    				property.setValue(defaultValue.replace("${" + propertyKey + "}", newValue));
+    			String value = property.getValue();
+    			if (value != null && value.contains("${" + propertyKey + "}")) {
+    				property.setValue(value.replace("${" + propertyKey + "}", newValue));
     				if (GROUP_ID.equals(property.getKey())) {
     		   			wizardPage.setGroupId(property.getValue());
     		    	}
