@@ -50,7 +50,7 @@ public class NewGraniteProjectWizard extends AbstractNewMavenBasedSlingApplicati
 
 	@Override
 	public boolean acceptsArchetype(Archetype archetype2) {
-		return (archetype2.getGroupId().startsWith("com.adobe.granite.archetypes") );
+		return (archetype2.getGroupId().startsWith("com.adobe.granite.archetypes"));
 	}
 	
 	private IProject getParentProject(List<IProject> projects) {

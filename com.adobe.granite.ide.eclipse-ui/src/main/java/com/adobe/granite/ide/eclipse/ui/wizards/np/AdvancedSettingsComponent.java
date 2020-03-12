@@ -16,7 +16,9 @@
 package com.adobe.granite.ide.eclipse.ui.wizards.np;
 
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.maven.archetype.catalog.Archetype;
 import org.apache.maven.archetype.metadata.RequiredProperty;
@@ -44,7 +46,9 @@ import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
@@ -60,6 +64,16 @@ public class AdvancedSettingsComponent extends ExpandableComposite {
 
     private static final String VALUE_PROPERTY = "value";
 
+    private static final String DEFAULT_VALUE_PROPERTY = "defaultValue";
+    
+    public static final String GROUP_ID = "groupId";
+    
+    public static final String ARTIFACT_ID = "artifactId";
+    
+    public static final String APP_ID = "appId";
+    
+    public static final String APP_TITLE = "appTitle";
+
     Text javaPackage;
 
     private boolean javaPackageModified;
@@ -68,7 +82,7 @@ public class AdvancedSettingsComponent extends ExpandableComposite {
 
     Table propertiesTable;
 
-    private List<RequiredProperty> properties;
+    private Map<String, RequiredPropertyWrapper> properties = new LinkedHashMap<String, RequiredPropertyWrapper>();
 
     Text version;
 
@@ -189,10 +203,16 @@ public class AdvancedSettingsComponent extends ExpandableComposite {
                 propertiesTable, SWT.NONE);
         propertiesTableValueColumn.setWidth(300);
         propertiesTableValueColumn.setText("Value");
+        
+        TableColumn propertiesTableDefaultValueColumn = new TableColumn(
+                propertiesTable, SWT.NONE);
+        propertiesTableDefaultValueColumn.setWidth(300);
+        propertiesTableDefaultValueColumn.setText("Default");
 
         propertiesViewer.setColumnProperties(new String[] {
                 KEY_PROPERTY,
-                VALUE_PROPERTY });
+                VALUE_PROPERTY,
+                DEFAULT_VALUE_PROPERTY});
 
         propertiesViewer.setCellEditors(new CellEditor[] {
                 null /* cannot edit the name */,
@@ -204,9 +224,11 @@ public class AdvancedSettingsComponent extends ExpandableComposite {
 
             public void modify(Object element, String property, Object value) {
                 if (element instanceof TableItem) {
-                    ((TableItem) element).setText(
+                	TableItem item = (TableItem) element;
+                    item.setText(
                             getTextIndex(property),
                             String.valueOf(value));
+                    handleModifyText(item.getText(0), String.valueOf(value), true);
                     wizardPage.dialogChanged();
                 }
             }
@@ -230,6 +252,7 @@ public class AdvancedSettingsComponent extends ExpandableComposite {
         }
     }
 
+    @SuppressWarnings("restriction")
     void initialize() {
         if (propertiesTable == null) {
             return;
@@ -245,21 +268,26 @@ public class AdvancedSettingsComponent extends ExpandableComposite {
                     .getDefault().getArchetypeManager();
             ArtifactRepository remoteArchetypeRepository = archetypeManager
                     .getArchetypeRepository(archetype);
-            properties = (List<RequiredProperty>) archetypeManager
+            properties.clear();
+            for (RequiredProperty prop : (List<RequiredProperty>) archetypeManager
                     .getRequiredProperties(archetype,
-                            remoteArchetypeRepository, null);
+                            remoteArchetypeRepository, null)) {
+            	properties.put(prop.getKey(), new RequiredPropertyWrapper(prop));
+            }
 
             Table table = propertiesViewer.getTable();
             table.setItemCount(properties.size());
             int i = 0;
-            for (Iterator<RequiredProperty> it = properties.iterator(); it
+            for (Iterator<RequiredPropertyWrapper> it = properties.values().iterator(); it
                     .hasNext();) {
-                RequiredProperty rp = it.next();
+                RequiredPropertyWrapper rp = it.next();
                 TableItem item = table.getItem(i++);
                 if (!rp.getKey().equals(item.getText())) {
                     // then create it - otherwise, reuse it
                     item.setText(0, rp.getKey());
-                    item.setText(1, "");
+                    rp.setValue(rp.getDefaultValue());
+                    item.setText(1, rp.getValue() != null ? rp.getValue() : "");
+                    item.setText(2, rp.getDefaultValue() != null ? rp.getDefaultValue() : "");
                     item.setData(item);
                 }
             }
@@ -270,60 +298,46 @@ public class AdvancedSettingsComponent extends ExpandableComposite {
 
     }
 
-    public void handleModifyText() {
-        final String artifactId = wizardPage.getArtifactId();
-        final String groupId = wizardPage.getGroupId();
-        final String name = wizardPage.getParameterName();
-        
-        final String defaultJavaPackage;
-        if (artifactId.length() == 0) {
-            defaultJavaPackage = SimplerParametersWizardPage
-                    .getDefaultJavaPackage(
-                            groupId, "");
-        } else {
-            defaultJavaPackage = SimplerParametersWizardPage
-                    .getDefaultJavaPackage(
-                            groupId,
-                            artifactId);
-        }
-        
-        String defaultAppsName = name.toLowerCase();
-        defaultAppsName = defaultAppsName.replaceAll("[^a-zA-Z]", "");
-        
+    @SuppressWarnings("restriction")
+	public void handleModifyText(String propertyKey, String newValue, boolean updateMainControls) {
+    	if (updateMainControls) {   		
+	    	if (GROUP_ID.equals(propertyKey)) {
+	   			wizardPage.setGroupId(newValue);
+	    	}
+	    	if (ARTIFACT_ID.equals(propertyKey)) {
+	    		wizardPage.setArtifactId(newValue);
+	    	}
+	    }
+    	if (GROUP_ID.equals(propertyKey) && !javaPackageModified) {
+    		javaPackage.setText(SimplerParametersWizardPage.getDefaultJavaPackage(newValue, ""));
+    	}
+
         Table table = propertiesViewer.getTable();
-        table.setItemCount(properties.size());
         int i = 0;
-        for (Iterator<RequiredProperty> it = properties.iterator(); it
-                .hasNext();) {
-            final RequiredProperty rp = it.next();
-            final String text;
-            if (rp.getKey().equals("artifactName")) {
-                text = name;
-            } else if (rp.getKey().equals("packageGroup")) {
-                text = name+" Content Package";
-            } else if (rp.getKey().equals("appsFolderName")) {
-                text = defaultAppsName;
-            } else if (rp.getKey().equals("contentFolderName")) {
-                text = defaultAppsName;
-            } else if (rp.getKey().equals("confFolderName")) {
-                text = defaultAppsName;
-            } else if (rp.getKey().equals("cssId")) {
-                text = artifactId;
-            } else if (rp.getKey().equals("componentGroupName")) {
-                text = name+" Components";
-            } else if (rp.getKey().equals("siteName")) {
-                text = name+" Site";
-            } else {
-                continue;
+    	for (String key : properties.keySet()) {
+    		RequiredPropertyWrapper property = properties.get(key);
+    		if (propertyKey.equals(property.getKey())) {
+    			property.setValue(newValue);
+    		} else if (!property.isModified()) {
+    			String value = property.getValue();
+    			if (value != null && value.contains("${" + propertyKey + "}")) {
+    				property.setValue(value.replace("${" + propertyKey + "}", newValue));
+    				if (GROUP_ID.equals(property.getKey())) {
+    		   			wizardPage.setGroupId(property.getValue());
+    		    	}
+    		    	if (ARTIFACT_ID.equals(property.getKey())) {
+    		    		wizardPage.setArtifactId(property.getValue());
+    		    	}
+    			}
+    		}
+			TableItem item = table.getItem(i++);
+            item.setText(0, property.getKey());
+            if (property.getValue() != null) {
+            	item.setText(1, property.getValue());
             }
-            // create or reuse:
-            TableItem item = table.getItem(i++);
-            item.setText(0, rp.getKey());
-            item.setText(1, text);
+            item.setText(2, property.getDefaultValue() != null ? property.getDefaultValue() : "");
             item.setData(item);
-        }
-        if (!javaPackageModified) {
-            javaPackage.setText(defaultJavaPackage);
-        }
+    	}
+
     }
 }
