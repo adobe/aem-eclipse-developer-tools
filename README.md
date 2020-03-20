@@ -1,6 +1,6 @@
 # AEM Developer Tools for Eclipse 
 
-[![Build Status](https://travis-ci.org/adobe/aem-eclipse-developer-tools.svg?branch=master)](https://travis-ci.org/Adobe-Marketing-Cloud/aem-eclipse-developer-tools)
+[![CircleCI](https://circleci.com/gh/adobe/aem-eclipse-developer-tools.svg?style=svg)](https://circleci.com/gh/adobe/aem-eclipse-developer-tools)
 
 ![](https://raw.githubusercontent.com/wiki/adobe/aem-eclipse-developer-tools/screenshots/eclipse.png)
 
