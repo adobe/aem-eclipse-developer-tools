@@ -6,6 +6,7 @@ orbs:
 workflows:
   maven_test:
     jobs:
+      - maven/with_cache:
+          maven_command: 'mvn compile'
       # checkout, build, test, and upload test results
       - maven/test:
-          maven_command: 'mvn clean install'
