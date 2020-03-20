@@ -8,4 +8,4 @@ workflows:
     jobs:
       # checkout, build, test, and upload test results
       - maven/test:
-          command: 'clean install'
+          maven_command: 'mvn clean install'
