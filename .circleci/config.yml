@@ -34,21 +34,6 @@ jobs:
       - store_artifacts:
           path: ~/test-results/junit
 
-  deploy_snapshot:
-    docker:
-      - image: circleci/openjdk:8-jdk-node
-    working_directory: ~/repo
-
-    steps:
-      - checkout
-      - restore_cache: # restore the saved cache
-          keys:
-            - v1-dependencies-{{ checksum "pom.xml" }}
-            # fallback to using the latest cache if no exact match is found
-      - run:
-          name: Deploy Snapshots
-          command: node ci/deploy_snapshots.js
-
   release:
     docker:
       - image: circleci/openjdk:8-jdk-node
@@ -72,14 +57,6 @@ workflows:
           filters:
             tags:
               only: /.*/
-      - deploy_snapshot:
-          requires:
-            - build-java-8
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only: /^@deploy-snapshot$/
       - release:
           requires:
             - build-java-8
