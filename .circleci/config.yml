@@ -7,6 +7,4 @@ workflows:
   maven_test:
     jobs:
       - maven/test: # checkout, build, test, and upload test results
-          steps:
-            - with_cache:
-                maven_command: 'mvn package'
+          maven_command: 'mvn2'
