@@ -1,0 +1,67 @@
+version: 2.1
+
+jobs:
+  build-java-8:
+    working_directory: ~/repo
+    docker:
+      - image: circleci/openjdk:8-jdk-browsers
+    environment:
+      # Customize the JVM maximum heap limit
+      MAVEN_OPTS: -Xmx3200m
+    steps:
+      - checkout
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "pom.xml" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+      - run: mvn package dependency:go-offline
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: v1-dependencies-{{ checksum "pom.xml" }}
+      # run tests!
+      - run: mvn verify
+      - run:
+          name: Save test results
+          command: |
+            mkdir -p ~/test-results/junit/
+            find . -type f -regex ".*/surefire-reports/.*" -exec cp {} ~/test-results/junit/ \;
+          when: always
+      - store_test_results:
+          path: ~/test-results
+      - store_artifacts:
+          path: ~/test-results/junit
+
+  release:
+    docker:
+      - image: circleci/openjdk:8-jdk-node
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+      - restore_cache: # restore the saved cache
+          keys:
+            - v1-dependencies-{{ checksum "pom.xml" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+      - run:
+          name: Release
+          command: node ci/release.js
+
+workflows:
+  build-and-release:
+    jobs:
+      - build-java-8:
+          filters:
+            tags:
+              only: /.*/
+      - release:
+          requires:
+            - build-java-8
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^@release(-\d+\.\d+\.\d+)?$/
