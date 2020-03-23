@@ -32,33 +32,59 @@
   <name>AEM Developer Tools for Eclipse: Update Site</name>
 
   <build>
-  	<extensions>
-      <extension>
-        <groupId>org.apache.maven.wagon</groupId>
-         <artifactId>wagon-ssh</artifactId>
-         <version>2.6</version>
-      </extension>
-    </extensions>
-
     <plugins>
       <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>wagon-maven-plugin</artifactId>
-        <version>1.0-beta-5</version>
+        <artifactId>maven-clean-plugin</artifactId>
+        <version>2.4.1</version>
         <executions>
           <execution>
-            <id>upload-p2repo</id>
+            <id>delete-files</id>
             <phase>deploy</phase>
             <goals>
-              <goal>upload</goal>
+              <goal>clean</goal>
             </goals>
             <configuration>
-              <serverId>eclipse.update.site</serverId>
-              <fromDir>${project.build.directory}/repository</fromDir>
-              <includes>**</includes>
-              <excludes>pom.xml</excludes>
-              <url>${eclipse.update.site.url}</url>
-              <toDir>${project.version}</toDir>
+              <filesets>
+                <fileset>
+                  <directory>../docs</directory>
+                  <includes>
+                    <include>**/*.*</include>
+                  </includes>
+                  <followSymlinks>false</followSymlinks>
+                </fileset>
+              </filesets>
+              <excludeDefaultDirectories>true</excludeDefaultDirectories>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>3.1.0</version>
+        <executions>
+          <execution>
+            <id>copy-resources</id>
+            <!-- here the phase you need -->
+            <phase>deploy</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>../docs</outputDirectory>
+              <resources>
+                <resource>
+                  <directory>target/repository</directory>
+                  <filtering>false</filtering>
+                </resource>
+                <resource>
+                  <directory>target</directory>
+                  <includes>
+                    <include>**/*.zip</include>
+                  </includes>
+                  <filtering>false</filtering>
+                </resource>
+              </resources>
+              <overwrite>true</overwrite>
             </configuration>
           </execution>
         </executions>

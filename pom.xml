@@ -15,130 +15,178 @@
  |  limitations under the License.
 -->
 <project
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-  xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <modelVersion>4.0.0</modelVersion>
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+    xmlns="http://maven.apache.org/POM/4.0.0">
+    <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.adobe.granite.ide</groupId>
-  <artifactId>granite-ide-reactor</artifactId>
-  <version>1.2.0-SNAPSHOT</version>
-  <packaging>pom</packaging>
+    <groupId>com.adobe.granite.ide</groupId>
+    <artifactId>granite-ide-reactor</artifactId>
+    <version>1.2.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
 
-  <name>Granite IDE Tools: Reactor</name>
+    <name>Granite IDE Tools: Reactor</name>
 
-  <inceptionYear>2014</inceptionYear>
-  <licenses>
-      <license>
-        <name>The Apache Software License, Version 2.0</name>
-          <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-      </license>
-  </licenses>
-  <organization>
-      <name>Adobe</name>
-      <url>http://www.adobe.com/</url>
-  </organization>
+    <inceptionYear>2014</inceptionYear>
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+    <organization>
+        <name>Adobe</name>
+        <url>http://www.adobe.com/</url>
+    </organization>
+    <scm>
+        <connection>scm:git:https://github.com/adobe/aem-eclipse-developer-tools.git</connection>
+        <developerConnection>scm:git:https://github.com/adobe/aem-eclipse-developer-tools.git</developerConnection>
+        <url>https://github.com/adobe/aem-eclipse-developer-tools.git</url>
+        <tag>HEAD</tag>
+    </scm>
 
-  <properties>
-    <tycho.version>1.6.0</tycho.version>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <update.site.suffix>/</update.site.suffix>
-  </properties>
+    <properties>
+        <tycho.version>1.6.0</tycho.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <update.site.suffix>/</update.site.suffix>
+    </properties>
 
-  <modules>
-    <module>com.adobe.granite.ide.target-definition</module>
-    <module>com.adobe.granite.ide.eclipse-ui</module>
-    <module>com.adobe.granite.ide.feature</module>
-    <module>com.adobe.granite.ide.p2update</module>
-  </modules>
+    <modules>
+        <module>com.adobe.granite.ide.target-definition</module>
+        <module>com.adobe.granite.ide.eclipse-ui</module>
+        <module>com.adobe.granite.ide.feature</module>
+        <module>com.adobe.granite.ide.p2update</module>
+    </modules>
 
-  <build>
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-deploy-plugin</artifactId>
-          <version>2.8.1</version>
-          <configuration>
-            <skip>true</skip>
-          </configuration>
-        </plugin>
-      </plugins>
-    </pluginManagement>
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>2.8.1</version>
+                    <configuration>
+                        <skip>true</skip>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
 
-    <plugins>
-      <plugin>
-        <groupId>org.eclipse.tycho</groupId>
-        <artifactId>tycho-maven-plugin</artifactId>
-        <version>${tycho.version}</version>
-        <extensions>true</extensions>
-      </plugin>
-      <plugin>
-          <groupId>org.eclipse.tycho</groupId>
-          <artifactId>tycho-versions-plugin</artifactId>
-          <version>${tycho.version}</version>
-      </plugin>
-      <plugin>
-        <groupId>org.eclipse.tycho</groupId>
-        <artifactId>target-platform-configuration</artifactId>
-        <version>${tycho.version}</version>
-        <configuration>
-          <target>
-            <artifact>
-              <groupId>com.adobe.granite.ide</groupId>
-              <artifactId>com.adobe.granite.ide.target-definition</artifactId>
-              <version>${project.version}</version>
-            </artifact>
-          </target>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
+        <plugins>
+            <plugin>
+                <groupId>org.eclipse.tycho</groupId>
+                <artifactId>tycho-maven-plugin</artifactId>
+                <version>${tycho.version}</version>
+                <extensions>true</extensions>
+            </plugin>
+            <plugin>
+                <groupId>org.eclipse.tycho</groupId>
+                <artifactId>tycho-versions-plugin</artifactId>
+                <version>${tycho.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.eclipse.tycho</groupId>
+                <artifactId>target-platform-configuration</artifactId>
+                <version>${tycho.version}</version>
+                <configuration>
+                    <target>
+                        <artifact>
+                            <groupId>com.adobe.granite.ide</groupId>
+                            <artifactId>com.adobe.granite.ide.target-definition</artifactId>
+                            <version>${project.version}</version>
+                        </artifact>
+                    </target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.6</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                        <configuration>
+                            <gpgArguments>
+                                <arg>--pinentry-mode</arg>
+                                <arg>loopback</arg>
+                            </gpgArguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.7</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>ossrh</serverId>
+                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-scm-plugin</artifactId>
+                <version>1.11.2</version>
+                <executions>
+                    <execution>
+                        <id>default-cli</id>
+                        <goals>
+                            <goal>add</goal>
+                            <goal>checkin</goal>
+                        </goals>
+                        <configuration>
+                            <includes>**/META-INF/MANIFEST.MF,**/feature.xml,**/*.product,**/category.xml</includes>
+                            <excludes>**/target/**</excludes>
+                            <message>Changing the version to reflect the pom versions for the release</message>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.5.3</version>
+                <configuration>
+                    <preparationGoals>org.eclipse.tycho:tycho-versions-plugin:${tycho.version}:update-eclipse-metadata
+                        org.apache.maven.plugins:maven-scm-plugin:1.9.5:add org.apache.maven.plugins:maven-scm-plugin:1.9.5:checkin
+                    </preparationGoals>
+                    <completionGoals>org.eclipse.tycho:tycho-versions-plugin:${tycho.version}:update-eclipse-metadata
+                        org.apache.maven.plugins:maven-scm-plugin:1.9.5:add org.apache.maven.plugins:maven-scm-plugin:1.9.5:checkin
+                    </completionGoals>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
     <pluginRepositories>
         <pluginRepository>
             <id>jboss-public-repository-group</id>
             <name>JBoss Public Repository Group</name>
-			<url>http://repository.jboss.org/nexus/content/groups/public/</url>
+            <url>http://repository.jboss.org/nexus/content/groups/public/</url>
         </pluginRepository>
     </pluginRepositories>
 
-
-
-    <profiles>
-        <!--
-            Documentation on signing can be viewed in the Sling IDE Tooling README at
-            https://svn.apache.org/repos/asf/sling/trunk/tooling/ide/README.txt
-         -->
-        <profile>
-            <id>sign</id>
-            <activation>
-                <property>
-                    <name>jarsigner.alias</name>
-                </property>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-jarsigner-plugin</artifactId>
-                        <version>1.3</version>
-                        <executions>
-                            <execution>
-                                <id>sign</id>
-                                <goals>
-                                    <goal>sign</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <!-- used to built a preview update site -->
-        <profile>
-            <id>preview</id>
-            <properties>
-                <update.site.suffix>/preview/</update.site.suffix>
-            </properties>
-        </profile>
-    </profiles>
+    <!--
+      Deploy to the Maven Repositories using WebDAV URLs. This enables abstracting
+      the real location of the repositories and better access control. Finally
+      it mirrors read and write operations through the same mechanism.
+      NOTE: To use these dav: URLs, the WebDAV extension to Maven Wagon must
+      be declared in the build section above.
+    -->
+    <distributionManagement>
+        <repository>
+            <id>${releaseRepository-Id}</id>
+            <url>${releaseRepository-URL}</url>
+        </repository>
+        <snapshotRepository>
+            <id>${snapshotRepository-Id}</id>
+            <url>${snapshotRepository-URL}</url>
+            <uniqueVersion>false</uniqueVersion>
+        </snapshotRepository>
+    </distributionManagement>
 </project>
