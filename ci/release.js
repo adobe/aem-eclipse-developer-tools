@@ -29,36 +29,20 @@ if (!targetVersion) {
 }
 
 targetVersion = targetVersion[1];
+let releaseVersion = "";
+if (targetVersion !== undefined) {
+    releaseVersion = " -DreleaseVersion=" + targetVersion;
+}
 
 tools.gitImpersonate('CircleCi', 'noreply@circleci.com', () => {
     try {
         tools.stage("RELEASE");
-
         // We cannot find out what git branch has the tag, so we assume/enforce that releases are done on master
         console.log("Checking out the master branch so we can commit and push");
         tools.sh("git checkout master");
-
-        // Prepare artifact signing
         tools.prepareGPGKey();
-
-        // Create release tag
-        tools.sh("mvn tycho-versions:set-version -DnewVersion=" + targetVersion);
-        tools.sh("git commit -am 'Set version to " + targetVersion + " in preparation for release");
-        tools.sh("git tag -a -m 'Tagged " + targetVersion + "' aem-eclipse-developer-tools-" + targetVersion);
-
-        // Push release tag
-        tools.sh("git push && git push --tags");
-
-        // Prepare for next development cycle
-        let newVersion = targetVersion.substr(0, targetVersion.length - 1) +
-            (Number(targetVersion.substr(targetVersion.length - 1)) + 1).toString() +
-            "-SNAPSHOT";
-        tools.sh("mvn tycho-versions:set-version -DnewVersion=" + newVersion);
-        tools.sh("git commit -am 'Set version to " + newVersion + " after release' && git push");
-
+        tools.sh("mvn -B -s ci/settings.xml -Prelease clean release:prepare release:perform" + releaseVersion);
         tools.stage("RELEASE DONE");
-
-        // TODO: Deploy update site
     } finally {
         tools.removeGitTag(gitTag);
         tools.removeGPGKey()
