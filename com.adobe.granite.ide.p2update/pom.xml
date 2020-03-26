@@ -54,7 +54,7 @@
                                 <update.site.suffix>${update.site.suffix}</update.site.suffix>
                             </symbols>
                             <associateSites>
-                                <site>http://repo1.maven.org/maven2/.m2e/connectors/m2eclipse-tycho/0.6.0/N/0.6.0.201207302152/</site>
+                                <site>https://repo1.maven.org/maven2/.m2e/connectors/m2eclipse-tycho/0.6.0/N/0.6.0.201207302152/</site>
                             </associateSites>
                         </configuration>
                     </execution>
