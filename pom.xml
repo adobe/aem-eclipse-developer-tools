@@ -22,7 +22,9 @@
     <version>1.3.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>Granite IDE Tools: Reactor</name>
+    <name>AEM Eclipse Developer Tools</name>
+    <description>The Eclipse Plug-In that brings you the full connection to the Adobe Experience Manager.</description>
+    <url>https://github.com/adobe/aem-eclipse-developer-tools</url>
 
     <inceptionYear>2014</inceptionYear>
     <licenses>
@@ -35,6 +37,12 @@
         <name>Adobe</name>
         <url>http://www.adobe.com/</url>
     </organization>
+    <developers>
+        <developer>
+            <name>Adobe Reference Squad</name>
+            <email>ref-squad@adobe.com</email>
+        </developer>
+    </developers>
     <scm>
         <connection>scm:git:https://github.com/adobe/aem-eclipse-developer-tools.git</connection>
         <developerConnection>scm:git:https://github.com/adobe/aem-eclipse-developer-tools.git</developerConnection>
