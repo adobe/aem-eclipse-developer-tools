@@ -12,6 +12,7 @@ public class RequiredPropertyWrapper extends RequiredProperty {
 		super();
 		setKey(property.getKey());
 		setDefaultValue(property.getDefaultValue());
+		setValue(property.getDefaultValue());
 	}
 	
 	public boolean isModified() {

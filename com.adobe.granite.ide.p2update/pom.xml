@@ -21,7 +21,7 @@
 
     <parent>
         <groupId>com.adobe.granite.ide</groupId>
-        <artifactId>granite-ide-reactor</artifactId>
+        <artifactId>aem-eclipse-developer-tools</artifactId>
         <version>1.2.0-SNAPSHOT</version>
         <relativePath>../</relativePath>
     </parent>
@@ -54,7 +54,7 @@
                                 <update.site.suffix>${update.site.suffix}</update.site.suffix>
                             </symbols>
                             <associateSites>
-                                <site>http://repo1.maven.org/maven2/.m2e/connectors/m2eclipse-tycho/0.6.0/N/0.6.0.201207302152/</site>
+                                <site>https://repo1.maven.org/maven2/.m2e/connectors/m2eclipse-tycho/0.6.0/N/0.6.0.201207302152/</site>
                             </associateSites>
                         </configuration>
                     </execution>
@@ -62,73 +62,4 @@
             </plugin>
         </plugins>
     </build>
-    <profiles>
-        <profile>
-            <!-- This is the release profile. -->
-            <id>release</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <artifactId>maven-clean-plugin</artifactId>
-                        <version>2.4.1</version>
-                        <executions>
-                            <execution>
-                                <id>delete-files</id>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>clean</goal>
-                                </goals>
-                                <configuration>
-                                    <filesets>
-                                        <fileset>
-                                            <directory>../docs</directory>
-                                            <includes>
-                                                <include>**/*.*</include>
-                                            </includes>
-                                            <followSymlinks>false</followSymlinks>
-                                        </fileset>
-                                    </filesets>
-                                    <excludeDefaultDirectories>true</excludeDefaultDirectories>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <artifactId>maven-resources-plugin</artifactId>
-                        <version>3.1.0</version>
-                        <executions>
-                            <execution>
-                                <id>copy-resources</id>
-                                <!-- here the phase you need -->
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>copy-resources</goal>
-                                </goals>
-                                <configuration>
-                                    <outputDirectory>../docs</outputDirectory>
-                                    <resources>
-                                        <resource>
-                                            <directory>target/repository</directory>
-                                            <filtering>false</filtering>
-                                        </resource>
-                                        <resource>
-                                            <directory>target</directory>
-                                            <includes>
-                                                <include>**/*.zip</include>
-                                            </includes>
-                                            <filtering>false</filtering>
-                                        </resource>
-                                    </resources>
-                                    <overwrite>true</overwrite>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
 </project>

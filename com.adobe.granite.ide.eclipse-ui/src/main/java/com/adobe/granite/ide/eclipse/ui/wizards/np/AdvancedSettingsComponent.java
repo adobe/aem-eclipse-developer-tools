@@ -15,7 +15,6 @@
  */
 package com.adobe.granite.ide.eclipse.ui.wizards.np;
 
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,9 +45,7 @@ import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
@@ -274,23 +271,7 @@ public class AdvancedSettingsComponent extends ExpandableComposite {
                             remoteArchetypeRepository, null)) {
             	properties.put(prop.getKey(), new RequiredPropertyWrapper(prop));
             }
-
-            Table table = propertiesViewer.getTable();
-            table.setItemCount(properties.size());
-            int i = 0;
-            for (Iterator<RequiredPropertyWrapper> it = properties.values().iterator(); it
-                    .hasNext();) {
-                RequiredPropertyWrapper rp = it.next();
-                TableItem item = table.getItem(i++);
-                if (!rp.getKey().equals(item.getText())) {
-                    // then create it - otherwise, reuse it
-                    item.setText(0, rp.getKey());
-                    rp.setValue(rp.getDefaultValue());
-                    item.setText(1, rp.getValue() != null ? rp.getValue() : "");
-                    item.setText(2, rp.getDefaultValue() != null ? rp.getDefaultValue() : "");
-                    item.setData(item);
-                }
-            }
+            updateTable();
         } catch (Exception e) {
             throw new RuntimeException("Could not process archetype: "
                     + e.getMessage(), e);
@@ -300,44 +281,42 @@ public class AdvancedSettingsComponent extends ExpandableComposite {
 
     @SuppressWarnings("restriction")
 	public void handleModifyText(String propertyKey, String newValue, boolean updateMainControls) {
-    	if (updateMainControls) {   		
-	    	if (GROUP_ID.equals(propertyKey)) {
-	   			wizardPage.setGroupId(newValue);
-	    	}
-	    	if (ARTIFACT_ID.equals(propertyKey)) {
-	    		wizardPage.setArtifactId(newValue);
+    	RequiredPropertyWrapper property = properties.get(propertyKey);
+    	if (property != null) {
+    		property.setValue(newValue);
+    		property.setModified(true);
+	    	
+    		PropUtils.updateProperties(properties);
+
+	    	if (updateMainControls) {
+	    		RequiredPropertyWrapper groupId = properties.get(GROUP_ID);
+	    		if (groupId != null && groupId.getValue() != null) {
+		   			wizardPage.setGroupId(groupId.getValue());
+		   			if (!javaPackageModified) {
+		   				javaPackage.setText(SimplerParametersWizardPage.getDefaultJavaPackage(groupId.getValue(), ""));
+		   			}
+		    	}
+	    		RequiredPropertyWrapper artifactId = properties.get(ARTIFACT_ID);
+	    		if (artifactId != null && artifactId.getValue() != null) {
+		    		wizardPage.setArtifactId(artifactId.getValue());
+		    	}
 	    	}
 	    }
-    	if (GROUP_ID.equals(propertyKey) && !javaPackageModified) {
-    		javaPackage.setText(SimplerParametersWizardPage.getDefaultJavaPackage(newValue, ""));
-    	}
+    	updateTable();
+    }
 
+    public void updateTable() {
         Table table = propertiesViewer.getTable();
+        table.setItemCount(properties.size());
         int i = 0;
-    	for (String key : properties.keySet()) {
-    		RequiredPropertyWrapper property = properties.get(key);
-    		if (propertyKey.equals(property.getKey())) {
-    			property.setValue(newValue);
-    		} else if (!property.isModified()) {
-    			String value = property.getValue();
-    			if (value != null && value.contains("${" + propertyKey + "}")) {
-    				property.setValue(value.replace("${" + propertyKey + "}", newValue));
-    				if (GROUP_ID.equals(property.getKey())) {
-    		   			wizardPage.setGroupId(property.getValue());
-    		    	}
-    		    	if (ARTIFACT_ID.equals(property.getKey())) {
-    		    		wizardPage.setArtifactId(property.getValue());
-    		    	}
-    			}
-    		}
-			TableItem item = table.getItem(i++);
+        for (String key : properties.keySet()) {
+        	RequiredPropertyWrapper property = properties.get(key);
+        	TableItem item = table.getItem(i++);
             item.setText(0, property.getKey());
-            if (property.getValue() != null) {
-            	item.setText(1, property.getValue());
-            }
+           	item.setText(1, property.getValue() != null ? property.getValue() : "");
             item.setText(2, property.getDefaultValue() != null ? property.getDefaultValue() : "");
             item.setData(item);
-    	}
-
+        }
+   	
     }
 }
