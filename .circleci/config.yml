@@ -41,6 +41,9 @@ jobs:
 
     steps:
       - checkout
+      - add_ssh_keys:
+          fingerprints:
+            - "6a:4f:95:39:0b:9e:29:41:96:a7:9b:14:99:24:29:5c"
       - restore_cache: # restore the saved cache
           keys:
             - v1-dependencies-{{ checksum "pom.xml" }}
