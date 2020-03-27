@@ -52,6 +52,8 @@ public class PropUtils {
 					}
 				}
 				property.setValue(newValue);
+			} else {
+				property.setValue("");
 			}
 		}
 		return property.getValue();

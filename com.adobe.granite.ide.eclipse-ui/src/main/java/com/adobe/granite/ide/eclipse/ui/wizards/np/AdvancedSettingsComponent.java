@@ -307,6 +307,7 @@ public class AdvancedSettingsComponent extends ExpandableComposite {
 
     public void updateTable() {
         Table table = propertiesViewer.getTable();
+        table.setItemCount(properties.size());
         int i = 0;
         for (String key : properties.keySet()) {
         	RequiredPropertyWrapper property = properties.get(key);

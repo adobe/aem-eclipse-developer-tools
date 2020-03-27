@@ -46,6 +46,18 @@ public class PropUtilsTest {
     		},
     		new String[] {
     				"stackoverflow", "", "${stackoverflow}", ""
+    		},
+    		new String[] {
+    				"empty", "", "", ""
+    		},
+    		new String[] {
+    				"useempty", "", "${empty}", ""
+    		},
+    		new String[] {
+    				"null", null, null, null
+    		},
+    		new String[] {
+    				"usenull", "", "${null}", ""
     		}
     	});
     	
@@ -61,11 +73,15 @@ public class PropUtilsTest {
 	private void printProperties(Map<String, RequiredPropertyWrapper> properties) {
     	for (String key : properties.keySet()) {
     		RequiredPropertyWrapper property = properties.get(key);
-    		System.out.println(StringUtils.rightPad(property.getKey(), 30) + " | " + 
-    				StringUtils.rightPad(property.getValue(), 30) + " | " + 
-    				StringUtils.rightPad(property.getDefaultValue(), 30) + " | " +
-    				StringUtils.rightPad(String.valueOf(property.isModified()), 30));
+    		System.out.println(pad(property.getKey()) + " | " + 
+    				pad(property.getValue()) + " | " + 
+    				pad(property.getDefaultValue()) + " | " +
+    				pad(property.isModified()));
     	}
     	System.out.println("\n");
     }
+	
+	private String pad(Object obj) {
+		return StringUtils.rightPad(StringUtils.defaultString(String.valueOf(obj), ""), 30);
+	}
 }
