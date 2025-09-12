@@ -47,13 +47,10 @@
                             <siteTemplateFolder>siteTemplate</siteTemplateFolder>
                             <symbols>
                                 <update.site.name>${project.name}</update.site.name>
-                                <target.eclipse.version>Kepler or newer</target.eclipse.version>
+                                <target.eclipse.version>2022-12 or newer</target.eclipse.version>
                                 <project.version>${project.version}</project.version>
                                 <update.site.suffix>${update.site.suffix}</update.site.suffix>
                             </symbols>
-                            <associateSites>
-                                <site>https://repo1.maven.org/maven2/.m2e/connectors/m2eclipse-tycho/0.6.0/N/0.6.0.201207302152/</site>
-                            </associateSites>
                         </configuration>
                     </execution>
                 </executions>

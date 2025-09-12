@@ -11,6 +11,6 @@ public class QuickstartProjectConfigurator extends AbstractProjectConfigurator {
 
 	@Override
 	public void configure(ProjectConfigurationRequest request, IProgressMonitor monitor) throws CoreException {
-		ConfigurationHelper.convertToLaunchpadProject(request.getProject(), Path.fromPortableString("src/main/provisioning"));
+		ConfigurationHelper.convertToLaunchpadProject(request.mavenProjectFacade().getProject(), Path.fromPortableString("src/main/provisioning"));
 	}
 }
