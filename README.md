@@ -1,6 +1,6 @@
 # AEM Developer Tools for Eclipse 
 
-[![CircleCI](https://circleci.com/gh/adobe/aem-eclipse-developer-tools.svg?style=svg)](https://circleci.com/gh/adobe/aem-eclipse-developer-tools)
+[![Java CI with Maven](https://github.com/adobe/aem-eclipse-developer-tools/actions/workflows/maven.yml/badge.svg)](https://github.com/adobe/aem-eclipse-developer-tools/actions/workflows/maven.yml)
 
 ![](https://raw.githubusercontent.com/wiki/adobe/aem-eclipse-developer-tools/screenshots/eclipse.png)
 
