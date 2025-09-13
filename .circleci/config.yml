@@ -4,7 +4,7 @@ jobs:
   build-java-8:
     working_directory: ~/repo
     docker:
-      - image: circleci/openjdk:8-jdk-browsers
+      - image: circleci/openjdk:11-jdk-browsers
     environment:
       # Customize the JVM maximum heap limit
       MAVEN_OPTS: -Xmx3200m
@@ -36,7 +36,7 @@ jobs:
 
   release:
     docker:
-      - image: circleci/openjdk:8-jdk-node
+      - image: circleci/openjdk:11-jdk-node
     working_directory: ~/repo
 
     steps:
