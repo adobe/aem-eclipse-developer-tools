@@ -15,6 +15,8 @@
  */
 package com.adobe.granite.ide.eclipse.ui.wizards.np;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 import org.apache.maven.archetype.catalog.Archetype;
@@ -236,9 +238,9 @@ public class SimplerParametersWizardPage extends ArchetypeParametersWizardPage {
         return advancedSettings.javaPackage.getText();
     }
 
-    public Properties getProperties() {
+    public Map<String, String> getProperties() {
         int cnt = advancedSettings.propertiesTable.getItemCount();
-        Properties p = new Properties();
+        Map<String, String> p = new HashMap<>();
         for (int i = 0; i < cnt; i++) {
             TableItem item = advancedSettings.propertiesTable.getItem(i);
             p.put(item.getText(0), item.getText(1));

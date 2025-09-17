@@ -21,7 +21,7 @@ import java.util.Map;
 
 import org.apache.maven.archetype.catalog.Archetype;
 import org.apache.maven.archetype.metadata.RequiredProperty;
-import org.apache.maven.artifact.repository.ArtifactRepository;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.CellNavigationStrategy;
 import org.eclipse.jface.viewers.ColumnViewerEditor;
@@ -33,9 +33,10 @@ import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerEditor;
 import org.eclipse.jface.viewers.TableViewerFocusCellManager;
 import org.eclipse.jface.viewers.TextCellEditor;
-import org.eclipse.m2e.core.internal.MavenPluginActivator;
-import org.eclipse.m2e.core.internal.archetype.ArchetypeManager;
 import org.eclipse.m2e.core.project.ProjectImportConfiguration;
+import org.eclipse.m2e.core.ui.internal.M2EUIPluginActivator;
+import org.eclipse.m2e.core.ui.internal.archetype.ArchetypePlugin;
+import org.eclipse.m2e.core.ui.internal.archetype.MavenArchetype;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyAdapter;
 import org.eclipse.swt.events.KeyEvent;
@@ -261,14 +262,10 @@ public class AdvancedSettingsComponent extends ExpandableComposite {
         }
 
         try {
-            ArchetypeManager archetypeManager = MavenPluginActivator
-                    .getDefault().getArchetypeManager();
-            ArtifactRepository remoteArchetypeRepository = archetypeManager
-                    .getArchetypeRepository(archetype);
+            ArchetypePlugin archetypePlugin = M2EUIPluginActivator.getDefault().getArchetypePlugin();
+            List<RequiredProperty> requiredProps = archetypePlugin.getRequiredProperties(new MavenArchetype(archetype), new NullProgressMonitor());
             properties.clear();
-            for (RequiredProperty prop : (List<RequiredProperty>) archetypeManager
-                    .getRequiredProperties(archetype,
-                            remoteArchetypeRepository, null)) {
+            for (RequiredProperty prop : requiredProps) {
             	properties.put(prop.getKey(), new RequiredPropertyWrapper(prop));
             }
             updateTable();

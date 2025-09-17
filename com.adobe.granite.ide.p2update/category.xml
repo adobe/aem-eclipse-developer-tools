@@ -3,13 +3,13 @@
    <feature url="features/org.apache.sling.ide.feature_0.0.0.jar" id="org.apache.sling.ide.feature" version="0.0.0">
       <category name="sling"/>
    </feature>
-   <feature url="features/org.apache.sling.ide.m2e-feature_0.0.0.jar" id="org.apache.sling.ide.m2e-feature" version="0.0.0">
+   <feature url="features/org.apache.sling.ide.m2e.feature_0.0.0.jar" id="org.apache.sling.ide.m2e.feature" version="0.0.0">
       <category name="sling"/>
    </feature>
    <feature url="features/com.adobe.granite.ide.feature_0.0.0.qualifier.jar" id="com.adobe.granite.ide.feature" version="0.0.0">
       <category name="granite"/>
    </feature>
-   <feature url="features/org.apache.sling.ide.sightly-feature_0.0.0.qualifier.jar" id="org.apache.sling.ide.sightly-feature" version="0.0.0">
+   <feature url="features/org.apache.sling.ide.sightly.feature_0.0.0.qualifier.jar" id="org.apache.sling.ide.sightly.feature" version="0.0.0">
       <category name="sling"/>
    </feature>
    <category-def name="sling" label="Sling"/>
