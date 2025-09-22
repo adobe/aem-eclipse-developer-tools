@@ -1,16 +1,17 @@
 package com.adobe.granite.ide.eclipse.ui.wizards.np;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.apache.maven.archetype.metadata.RequiredProperty;
+
 import org.apache.maven.shared.utils.StringUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 @SuppressWarnings("restriction")
-public class PropUtilsTest {
+class PropUtilsTest {
 
 	private Map<String, RequiredPropertyWrapper> getProperties(String[][] props) {
 		Map<String, RequiredPropertyWrapper> properties = new LinkedHashMap<String, RequiredPropertyWrapper>();
@@ -25,9 +26,9 @@ public class PropUtilsTest {
 		}
 		return properties;
 	}
-	
+
     @Test
-    public void testUpdateProperties() {
+    void updateProperties() {
     	Map<String, RequiredPropertyWrapper> properties = getProperties(new String[][] {
     		new String[] {
     				"unmodified", "", "DEFAULT_UNMODIFIED", ""
@@ -82,6 +83,6 @@ public class PropUtilsTest {
     }
 	
 	private String pad(Object obj) {
-		return StringUtils.rightPad(StringUtils.defaultString(String.valueOf(obj), ""), 30);
+		return StringUtils.rightPad(String.valueOf(obj), 30);
 	}
 }
