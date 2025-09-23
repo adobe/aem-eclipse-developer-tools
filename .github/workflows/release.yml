@@ -52,7 +52,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.RELEASE_GITHUB_TOKEN }}
       with:
         tag_name: aem-eclipse-developer-tools-${{ inputs.release_version }}
-        release_name: Release ${{ inputs.release_version }}
+        release_name: AEM Developer Tools for Eclipse ${{ inputs.release_version }}
         body: ''
         draft: true
         prerelease: true
