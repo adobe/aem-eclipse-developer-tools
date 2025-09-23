@@ -52,6 +52,7 @@
 
     <properties>
         <tycho.version>4.0.13</tycho.version>
+        <maven.scm.plugin.version>1.13.0</maven.scm.plugin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <update.site.suffix>/</update.site.suffix>
     </properties>
@@ -145,7 +146,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-scm-plugin</artifactId>
-                        <version>1.13.0</version>
+                        <version>${maven.scm.plugin.version}</version>
                         <executions>
                             <execution>
                                 <id>default-cli</id>
@@ -168,10 +169,10 @@
                         <configuration>
                             <goals>clean install</goals>
                             <preparationGoals>org.eclipse.tycho:tycho-versions-plugin:${tycho.version}:update-eclipse-metadata
-                                org.apache.maven.plugins:maven-scm-plugin:1.9.5:add org.apache.maven.plugins:maven-scm-plugin:1.9.5:checkin
+                                org.apache.maven.plugins:maven-scm-plugin:${maven.scm.plugin.version}:add org.apache.maven.plugins:maven-scm-plugin:${maven.scm.plugin.version}:checkin
                             </preparationGoals>
                             <completionGoals>org.eclipse.tycho:tycho-versions-plugin:${tycho.version}:update-eclipse-metadata
-                                org.apache.maven.plugins:maven-scm-plugin:1.9.5:add org.apache.maven.plugins:maven-scm-plugin:1.9.5:checkin
+                                org.apache.maven.plugins:maven-scm-plugin:${maven.scm.plugin.version}:add org.apache.maven.plugins:maven-scm-plugin:${maven.scm.plugin.version}:checkin
                             </completionGoals>
                         </configuration>
                     </plugin>
