@@ -8,10 +8,6 @@ on:
         description: 'Release version (e.g., 1.3.1)'
         required: true
         type: string
-      development_version:
-        description: 'Next development version (e.g., 1.3.2-SNAPSHOT)'
-        required: true
-        type: string
 
 jobs:
   release:
@@ -41,8 +37,7 @@ jobs:
     - name: Run Maven Release
       run: |
         mvn -B -Prelease clean release:prepare release:perform \
-          -DreleaseVersion=${{ inputs.release_version }} \
-          -DdevelopmentVersion=${{ inputs.development_version }}
+          -DreleaseVersion=${{ inputs.release_version }}
       env:
         MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
     
