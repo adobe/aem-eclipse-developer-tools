@@ -68,7 +68,7 @@ jobs:
         asset_content_type: application/zip
     
     - name: Upload Pages artifact
-      uses: actions/upload-pages-artifact@v3
+      uses: actions/upload-pages-artifact@v4
       with:
         path: target/checkout/com.adobe.granite.ide.p2update/target/repository/
     
