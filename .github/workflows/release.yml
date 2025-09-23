@@ -45,14 +45,8 @@ jobs:
       env:
         MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
     
-    - name: Upload p2 update site
-      uses: actions/upload-artifact@v4
-      with:
-        name: ${{ github.event.repository.name }}-update-site-${{ inputs.release_version }}
-        path: target/checkout/com.adobe.granite.ide.p2update/target/repository
-        retention-days: 90
-    
     - name: Create GitHub Release
+      id: create_release
       uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.RELEASE_GITHUB_TOKEN }}
@@ -62,3 +56,13 @@ jobs:
         body: ''
         draft: true
         prerelease: true
+    
+    - name: Upload p2 update site to release
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.RELEASE_GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: target/checkout/com.adobe.granite.ide.p2update/target/com.adobe.granite.ide.p2update-${{ inputs.release_version }}.zip
+        asset_name: com.adobe.granite.ide.p2update-${{ inputs.release_version }}.zip
+        asset_content_type: application/zip
