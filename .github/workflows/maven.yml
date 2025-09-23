@@ -33,6 +33,6 @@ jobs:
       if: github.ref == 'refs/heads/master' && github.event_name == 'push'
       uses: actions/upload-artifact@v4
       with:
-        name: p2-update-site
+        name: ${{ github.event.repository.name }}-update-site-${{ github.sha }}
         path: com.adobe.granite.ide.p2update/target/repository
         retention-days: 30

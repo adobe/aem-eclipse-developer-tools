@@ -48,7 +48,7 @@ jobs:
     - name: Upload p2 update site
       uses: actions/upload-artifact@v4
       with:
-        name: p2-update-site-${{ inputs.release_version }}
+        name: ${{ github.event.repository.name }}-update-site-${{ inputs.release_version }}
         path: target/checkout/com.adobe.granite.ide.p2update/target/repository
         retention-days: 90
     
