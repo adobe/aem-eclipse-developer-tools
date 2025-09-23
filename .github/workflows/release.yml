@@ -12,6 +12,10 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
     
     steps:
     - name: Checkout repository
@@ -62,3 +66,11 @@ jobs:
         asset_path: target/checkout/com.adobe.granite.ide.p2update/target/com.adobe.granite.ide.p2update-${{ inputs.release_version }}.zip
         asset_name: com.adobe.granite.ide.p2update-${{ inputs.release_version }}.zip
         asset_content_type: application/zip
+    
+    - name: Upload Pages artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: target/checkout/com.adobe.granite.ide.p2update/target/repository/
+    
+    - name: Deploy to GitHub Pages
+      uses: actions/deploy-pages@v4

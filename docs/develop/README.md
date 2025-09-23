@@ -18,7 +18,8 @@ Before creating a release please check the following:
    - Build the project
    - Create a git tag
    - Generate a draft release
-   - Upload the p2 update site zip
+   - Attach the p2 update site zip to the release
+   - Deploy the p2 update site to https://eclipse.adobe.com
 
 3. After the workflow completes:
    - Go to the Releases page on GitHub
