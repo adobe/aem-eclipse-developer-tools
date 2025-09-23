@@ -1,4 +1,4 @@
-name: Manual Release
+name: Create Release
 
 on:
   workflow_dispatch:
@@ -49,7 +49,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: p2-update-site-${{ inputs.release_version }}
-        path: com.adobe.granite.ide.p2update/target/repository
+        path: target/checkout/com.adobe.granite.ide.p2update/target/repository
         retention-days: 90
     
     - name: Create GitHub Release
