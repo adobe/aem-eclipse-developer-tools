@@ -52,7 +52,7 @@
 
     <properties>
         <tycho.version>4.0.13</tycho.version>
-        <maven.scm.plugin.version>1.13.0</maven.scm.plugin.version>
+        <maven.scm.plugin.version>2.1.0</maven.scm.plugin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <update.site.suffix>/</update.site.suffix>
     </properties>
