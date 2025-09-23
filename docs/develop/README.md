@@ -1,12 +1,12 @@
 # Release Process
 
-Releases are automated using the GitHub workflow at [https://github.com/adobe/aem-eclipse-developer-tools/actions/workflows/release.yml](https://github.com/adobe/aem-eclipse-developer-tools/actions/workflows/release.yml).
+Releases are automated using the [Create Release GitHub workflow ](https://github.com/adobe/aem-eclipse-developer-tools/actions/workflows/release.yml). Manual follow-up steps are documented in this guide.
 
 ## Prerequisites
 
 Before creating a release please check the following:
 
-1. Only release with a release version of the Sling IDE tooling for Eclipse. The referenced p2 update site must start with `https://dist.apache.org/repos/dist/release/sling/eclipse/` and not with `https://nightlies.apache.org/sling/eclipse/`.
+1. The [target platform definition](com.adobe.granite.ide.target-definition/com.adobe.granite.ide.target-definition.target) many only reference a released version of the Sling IDE tooling for Eclipse. The referenced p2 update site must start with `https://dist.apache.org/repos/dist/release/sling/eclipse/` and not with `https://nightlies.apache.org/sling/eclipse/`.
 
 2. The release process uses a specific `RELEASE_GITHUB_TOKEN` (not your personal token). This token must be periodically renewed. When in doubt, ask the last person who performed a release. The token must be scoped to this repository only and have read and write access to actions, administration, and code.
 
