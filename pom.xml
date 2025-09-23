@@ -167,6 +167,7 @@
                         <artifactId>maven-release-plugin</artifactId>
                         <version>2.5.3</version>
                         <configuration>
+                            <autoVersionSubmodules>true</autoVersionSubmodules>
                             <goals>clean install</goals>
                             <preparationGoals>org.eclipse.tycho:tycho-versions-plugin:${tycho.version}:update-eclipse-metadata
                                 org.apache.maven.plugins:maven-scm-plugin:${maven.scm.plugin.version}:add org.apache.maven.plugins:maven-scm-plugin:${maven.scm.plugin.version}:checkin
