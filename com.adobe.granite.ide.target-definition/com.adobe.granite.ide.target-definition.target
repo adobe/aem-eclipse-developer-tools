@@ -35,7 +35,7 @@
         <unit id="org.apache.sling.ide.feature.feature.group" />
         <unit id="org.apache.sling.ide.m2e.feature.feature.group"/>
         <unit id="org.apache.sling.ide.sightly.feature.feature.group"/>
-        <repository location="https://nightlies.apache.org/sling/eclipse/"/>
+        <repository location="https://dist.apache.org/repos/dist/release/sling/eclipse/1.3.0/"/>
     </location>
 </locations>
 <targetJRE path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-17"/>
