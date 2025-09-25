@@ -8,7 +8,7 @@ The AEM Developer Tools for Eclipse is a plugin based on the [Eclipse plugin for
 
 ### Installation
 
-For standard installation instructions and more information, check the [AEM Developer Tools for Eclipse Update Site](https://eclipse.adobe.com/) and the [AEM Developer Tools for Eclipse documentation](https://experienceleague.adobe.com/en/docs/experience-manager-65/content/implementing/developing/devtools/aem-eclipse).
+For standard installation instructions and more information, check the [AEM Developer Tools Eclipse Marketplace entry](https://marketplace.eclipse.org/content/aem-developer-tools-eclipse) and the [AEM Developer Tools for Eclipse documentation](https://experienceleague.adobe.com/en/docs/experience-manager-65/content/implementing/developing/devtools/aem-eclipse).
 
 #### Using Unreleased Versions
 
