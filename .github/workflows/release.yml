@@ -67,6 +67,11 @@ jobs:
         asset_name: com.adobe.granite.ide.p2update-${{ inputs.release_version }}.zip
         asset_content_type: application/zip
     
+    - name: Copy p2 update site zip to repository root
+      run: |
+        cp target/checkout/com.adobe.granite.ide.p2update/target/com.adobe.granite.ide.p2update-${{ inputs.release_version }}.zip \
+           target/checkout/com.adobe.granite.ide.p2update/target/repository/
+    
     - name: Upload Pages artifact
       uses: actions/upload-pages-artifact@v4
       with:
