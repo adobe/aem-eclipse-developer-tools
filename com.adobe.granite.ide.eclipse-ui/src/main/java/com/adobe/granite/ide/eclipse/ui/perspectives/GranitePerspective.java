@@ -65,7 +65,6 @@ public class GranitePerspective implements IPerspectiveFactory {
 					0.3f,
 					factory.getEditorArea());
 		left.addView(IPageLayout.ID_PROJECT_EXPLORER);
-		left.addPlaceholder(IPageLayout.ID_RES_NAV);
 		
 		IFolderLayout leftMiddle =
 				factory.createFolder(
@@ -94,9 +93,6 @@ public class GranitePerspective implements IPerspectiveFactory {
 						0.75f,
 						factory.getEditorArea());
 		right.addView(IPageLayout.ID_OUTLINE);
-		
-		factory.addFastView("org.eclipse.team.ccvs.ui.RepositoriesView",0.50f); //NON-NLS-1
-		factory.addFastView("org.eclipse.team.sync.views.SynchronizeView", 0.50f); //NON-NLS-1
 	}
 
 	private void addActionSets() {
@@ -132,9 +128,10 @@ public class GranitePerspective implements IPerspectiveFactory {
 		factory.addShowViewShortcut("org.eclipse.pde.ui.DependenciesView"); //NON-NLS-1
 		factory.addShowViewShortcut("org.eclipse.jdt.junit.ResultView"); //NON-NLS-1
 		factory.addShowViewShortcut("org.eclipse.team.ui.GenericHistoryView"); //NON-NLS-1
+		factory.addShowViewShortcut("org.eclipse.team.ccvs.ui.RepositoriesView"); //NON-NLS-1
+		factory.addShowViewShortcut("org.eclipse.team.sync.views.SynchronizeView"); //NON-NLS-1
 		factory.addShowViewShortcut(IConsoleConstants.ID_CONSOLE_VIEW);
 		factory.addShowViewShortcut(JavaUI.ID_PACKAGES);
-		factory.addShowViewShortcut(IPageLayout.ID_RES_NAV);
 		factory.addShowViewShortcut(IPageLayout.ID_PROBLEM_VIEW);
 		factory.addShowViewShortcut(IPageLayout.ID_OUTLINE);
 	}
