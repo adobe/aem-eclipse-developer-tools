@@ -102,7 +102,6 @@ public class GranitePerspective implements IPerspectiveFactory {
 		factory.addActionSet("org.eclipse.jdt.debug.ui.JDTDebugActionSet"); //NON-NLS-1
 		factory.addActionSet("org.eclipse.jdt.junit.JUnitActionSet"); //NON-NLS-1
 		factory.addActionSet("org.eclipse.team.ui.actionSet"); //NON-NLS-1
-		factory.addActionSet("org.eclipse.team.cvs.ui.CVSActionSet"); //NON-NLS-1
 		factory.addActionSet("org.eclipse.ant.ui.actionSet.presentation"); //NON-NLS-1
 		factory.addActionSet(JavaUI.ID_ACTION_SET);
 		factory.addActionSet(JavaUI.ID_ELEMENT_CREATION_ACTION_SET);
@@ -111,25 +110,20 @@ public class GranitePerspective implements IPerspectiveFactory {
 
 	private void addPerspectiveShortcuts() {
 		factory.addPerspectiveShortcut("org.eclipse.team.ui.TeamSynchronizingPerspective"); //NON-NLS-1
-		factory.addPerspectiveShortcut("org.eclipse.team.cvs.ui.cvsPerspective"); //NON-NLS-1
 		factory.addPerspectiveShortcut("org.eclipse.ui.resourcePerspective"); //NON-NLS-1
 	}
 
 	private void addNewWizardShortcuts() {
 		factory.addNewWizardShortcut("org.apache.sling.ide.eclipse.ui.wizards.NewSlingProjectWizard");//NON-NLS-1
-		factory.addNewWizardShortcut("org.eclipse.team.cvs.ui.newProjectCheckout");//NON-NLS-1
 		factory.addNewWizardShortcut("org.eclipse.ui.wizards.new.folder");//NON-NLS-1
 		factory.addNewWizardShortcut("org.eclipse.ui.wizards.new.file");//NON-NLS-1
 	}
 
 	private void addViewShortcuts() {
 		factory.addShowViewShortcut("org.eclipse.ant.ui.views.AntView"); //NON-NLS-1
-		factory.addShowViewShortcut("org.eclipse.team.ccvs.ui.AnnotateView"); //NON-NLS-1
 		factory.addShowViewShortcut("org.eclipse.pde.ui.DependenciesView"); //NON-NLS-1
 		factory.addShowViewShortcut("org.eclipse.jdt.junit.ResultView"); //NON-NLS-1
 		factory.addShowViewShortcut("org.eclipse.team.ui.GenericHistoryView"); //NON-NLS-1
-		factory.addShowViewShortcut("org.eclipse.team.ccvs.ui.RepositoriesView"); //NON-NLS-1
-		factory.addShowViewShortcut("org.eclipse.team.sync.views.SynchronizeView"); //NON-NLS-1
 		factory.addShowViewShortcut(IConsoleConstants.ID_CONSOLE_VIEW);
 		factory.addShowViewShortcut(JavaUI.ID_PACKAGES);
 		factory.addShowViewShortcut(IPageLayout.ID_PROBLEM_VIEW);
