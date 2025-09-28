@@ -46,7 +46,7 @@ public class GranitePerspective implements IPerspectiveFactory {
 	}
 
 	private void addViews() {
-		// Creates the overall folder layout. 
+		// Creates the overall layout for the AEM Perspective. 
 		// Note that each new Folder uses a percentage of the remaining EditorArea.
 		
         IFolderLayout veryBottom =
@@ -120,6 +120,7 @@ public class GranitePerspective implements IPerspectiveFactory {
 	}
 
 	private void addViewShortcuts() {
+		// Add entries for the Window/Show View menu
 		factory.addShowViewShortcut("org.eclipse.ant.ui.views.AntView"); //NON-NLS-1
 		factory.addShowViewShortcut("org.eclipse.pde.ui.DependenciesView"); //NON-NLS-1
 		factory.addShowViewShortcut("org.eclipse.jdt.junit.ResultView"); //NON-NLS-1
