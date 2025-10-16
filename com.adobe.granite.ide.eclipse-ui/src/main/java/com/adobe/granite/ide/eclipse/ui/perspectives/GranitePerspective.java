@@ -46,7 +46,7 @@ public class GranitePerspective implements IPerspectiveFactory {
 	}
 
 	private void addViews() {
-		// Creates the overall folder layout. 
+		// Creates the overall layout for the AEM Perspective. 
 		// Note that each new Folder uses a percentage of the remaining EditorArea.
 		
         IFolderLayout veryBottom =
@@ -65,7 +65,6 @@ public class GranitePerspective implements IPerspectiveFactory {
 					0.3f,
 					factory.getEditorArea());
 		left.addView(IPageLayout.ID_PROJECT_EXPLORER);
-		left.addPlaceholder(IPageLayout.ID_RES_NAV);
 		
 		IFolderLayout leftMiddle =
 				factory.createFolder(
@@ -94,9 +93,6 @@ public class GranitePerspective implements IPerspectiveFactory {
 						0.75f,
 						factory.getEditorArea());
 		right.addView(IPageLayout.ID_OUTLINE);
-		
-		factory.addFastView("org.eclipse.team.ccvs.ui.RepositoriesView",0.50f); //NON-NLS-1
-		factory.addFastView("org.eclipse.team.sync.views.SynchronizeView", 0.50f); //NON-NLS-1
 	}
 
 	private void addActionSets() {
@@ -106,7 +102,6 @@ public class GranitePerspective implements IPerspectiveFactory {
 		factory.addActionSet("org.eclipse.jdt.debug.ui.JDTDebugActionSet"); //NON-NLS-1
 		factory.addActionSet("org.eclipse.jdt.junit.JUnitActionSet"); //NON-NLS-1
 		factory.addActionSet("org.eclipse.team.ui.actionSet"); //NON-NLS-1
-		factory.addActionSet("org.eclipse.team.cvs.ui.CVSActionSet"); //NON-NLS-1
 		factory.addActionSet("org.eclipse.ant.ui.actionSet.presentation"); //NON-NLS-1
 		factory.addActionSet(JavaUI.ID_ACTION_SET);
 		factory.addActionSet(JavaUI.ID_ELEMENT_CREATION_ACTION_SET);
@@ -115,26 +110,23 @@ public class GranitePerspective implements IPerspectiveFactory {
 
 	private void addPerspectiveShortcuts() {
 		factory.addPerspectiveShortcut("org.eclipse.team.ui.TeamSynchronizingPerspective"); //NON-NLS-1
-		factory.addPerspectiveShortcut("org.eclipse.team.cvs.ui.cvsPerspective"); //NON-NLS-1
 		factory.addPerspectiveShortcut("org.eclipse.ui.resourcePerspective"); //NON-NLS-1
 	}
 
 	private void addNewWizardShortcuts() {
 		factory.addNewWizardShortcut("org.apache.sling.ide.eclipse.ui.wizards.NewSlingProjectWizard");//NON-NLS-1
-		factory.addNewWizardShortcut("org.eclipse.team.cvs.ui.newProjectCheckout");//NON-NLS-1
 		factory.addNewWizardShortcut("org.eclipse.ui.wizards.new.folder");//NON-NLS-1
 		factory.addNewWizardShortcut("org.eclipse.ui.wizards.new.file");//NON-NLS-1
 	}
 
 	private void addViewShortcuts() {
+		// Add entries for the Window/Show View menu
 		factory.addShowViewShortcut("org.eclipse.ant.ui.views.AntView"); //NON-NLS-1
-		factory.addShowViewShortcut("org.eclipse.team.ccvs.ui.AnnotateView"); //NON-NLS-1
 		factory.addShowViewShortcut("org.eclipse.pde.ui.DependenciesView"); //NON-NLS-1
 		factory.addShowViewShortcut("org.eclipse.jdt.junit.ResultView"); //NON-NLS-1
 		factory.addShowViewShortcut("org.eclipse.team.ui.GenericHistoryView"); //NON-NLS-1
 		factory.addShowViewShortcut(IConsoleConstants.ID_CONSOLE_VIEW);
 		factory.addShowViewShortcut(JavaUI.ID_PACKAGES);
-		factory.addShowViewShortcut(IPageLayout.ID_RES_NAV);
 		factory.addShowViewShortcut(IPageLayout.ID_PROBLEM_VIEW);
 		factory.addShowViewShortcut(IPageLayout.ID_OUTLINE);
 	}
